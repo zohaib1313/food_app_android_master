@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingTop="@dimen/_8sdp"
+    android:paddingStart="@dimen/_8sdp"
+    android:paddingEnd="@dimen/_8sdp"
+    tools:context=".activities.user.UserDashboardActivity">
+
+    <com.factor.bouncy.BouncyRecyclerView
+        android:id="@+id/rvCartUser"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:allow_drag_reorder="true"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView7"
+        app:recyclerview_damping_ratio="DAMPING_RATIO_LOW_BOUNCY"
+        app:recyclerview_fling_animation_size=".7"
+        app:recyclerview_overscroll_animation_size=".7"
+        app:recyclerview_stiffness="STIFFNESS_MEDIUM"
+        tools:listitem="@layout/row_cart_user" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/layout_bg"
+
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/AppTextViewBold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_50sdp"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:gravity="start"
+                android:padding="@dimen/_12sdp"
+                android:text="Total Price:"
+                android:textSize="@dimen/_12sdp" />
+
+            <TextView
+                style="@style/AppTextViewBold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_50sdp"
+                android:maxLines="1"
+                android:padding="@dimen/_12sdp"
+                android:text="2400 pkr"
+                android:textSize="@dimen/_12sdp" />
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:onClick="placeOrder"
+            android:src="@drawable/place_oder_btn" />
+
+        <ImageView
+            android:src="@drawable/schedule_btn"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+
+            android:layout_marginBottom="@dimen/_20sdp"
+            android:onClick="scheduleLater"
+            android:text="Schedule Order" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView7"
+        style="@style/AppTextViewBold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_4sdp"
+        android:text="My Cart"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

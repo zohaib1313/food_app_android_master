@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".activities.ChooseUserLoginTypeActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="bottom"
+        android:layout_weight="1"
+        android:gravity="bottom"
+        android:orientation="vertical">
+
+        <soup.neumorphism.NeumorphButton
+            style="@style/ButtonShape"
+            android:onClick="orderFoodLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="I want to order food" />
+
+        <soup.neumorphism.NeumorphButton
+            style="@style/ButtonShape"
+            android:onClick="kitchenLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="I am kitchen owner" />
+
+        <soup.neumorphism.NeumorphButton
+            android:onClick="adminLogin"
+            style="@style/ButtonShape"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Admin" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="bottom"
+        android:layout_weight="2"
+        android:gravity="bottom">
+
+        <TextView
+            android:onClick="gotoTermsAndConditions"
+         style="@style/AppTextViewBold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_8sdp"
+            android:gravity="center"
+            android:text="Terms of use"
+            android:textSize="@dimen/_12sdp" />
+    </LinearLayout>
+
+
+</LinearLayout>

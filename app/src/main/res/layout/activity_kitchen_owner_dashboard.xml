@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/_8sdp"
+    tools:context=".activities.kitchen_owner.KitchenOwnerDashboardActivity">
+
+    <com.factor.bouncy.BouncyRecyclerView
+        android:id="@+id/rvKitchen"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:allow_drag_reorder="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView7"
+        app:recyclerview_damping_ratio="DAMPING_RATIO_LOW_BOUNCY"
+        app:recyclerview_fling_animation_size=".7"
+        app:recyclerview_overscroll_animation_size=".7"
+        app:recyclerview_stiffness="STIFFNESS_MEDIUM"
+        tools:listitem="@layout/row_dish" />
+
+
+
+    <TextView
+        android:id="@+id/textView7"
+        style="@style/AppTextViewBold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_4sdp"
+        android:text="My Dishes"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButton2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+
+        app:tint="@color/white"
+        android:onClick="addNewDish"
+        android:layout_marginEnd="@dimen/_20sdp"
+        android:layout_marginBottom="@dimen/_20sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@android:drawable/ic_input_add" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

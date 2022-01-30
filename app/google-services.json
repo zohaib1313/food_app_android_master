@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "119339287672",
+    "project_id": "foodorderingapp-49cb0",
+    "storage_bucket": "foodorderingapp-49cb0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:119339287672:android:a0ef784914b8b1a56d198d",
+        "android_client_info": {
+          "package_name": "com.bigbird.foodorderingapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "119339287672-ohj7otbtl5k7lhfk22jp6k7pt6pcntkq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bigbird.foodorderingapp",
+            "certificate_hash": "b2ef3ba6c47db548063415252cb03756a18ad34e"
+          }
+        },
+        {
+          "client_id": "119339287672-th3nk33bpvmvcvrprlv6qve00mv9tgle.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBKM6kTuKl_N24sthmLCVFDrZAW5W601kY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "119339287672-th3nk33bpvmvcvrprlv6qve00mv9tgle.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

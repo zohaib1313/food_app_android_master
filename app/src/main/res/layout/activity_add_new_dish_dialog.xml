@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:background="@android:color/transparent"
+    android:padding="@dimen/_18sdp">
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/textView10"
+            style="@style/AppTextViewBold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add new dish"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <EditText
+            android:id="@+id/textInputEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:hint="Name"
+            android:maxLines="1" />
+
+        <EditText
+            android:id="@+id/etPrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:hint="Price"
+            android:maxLines="1" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <soup.neumorphism.NeumorphButton
+                android:id="@+id/btnAdd"
+                style="@style/ButtonShape"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Add"
+
+                />
+
+            <soup.neumorphism.NeumorphButton
+                android:id="@+id/btnCancel"
+                style="@style/ButtonShape"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:layout_weight="1"
+                android:text="Cancel"
+
+                />
+        </LinearLayout>
+
+
+    </LinearLayout>
+</RelativeLayout>
