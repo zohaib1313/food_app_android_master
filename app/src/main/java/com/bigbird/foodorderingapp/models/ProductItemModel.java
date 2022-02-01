@@ -14,6 +14,9 @@ public class ProductItemModel {
         this.count = count;
     }
 
+    public ProductItemModel() {
+    }
+
     public String getId() {
         return id;
     }

@@ -16,6 +16,8 @@ import com.bigbird.foodorderingapp.activities.kitchen_owner.SignUpKitchenOwnerAc
 import com.bigbird.foodorderingapp.activities.user.SignUpUserActivity;
 import com.bigbird.foodorderingapp.activities.user.UserDashboardActivity;
 import com.bigbird.foodorderingapp.models.ModelAdminUser;
+import com.bigbird.foodorderingapp.models.ModelKitchenUser;
+import com.bigbird.foodorderingapp.models.ModelUserTypeUser;
 import com.bigbird.foodorderingapp.utils.AppConstant;
 import com.bigbird.foodorderingapp.utils.SessionManager;
 import com.bigbird.foodorderingapp.utils.helpers;
@@ -114,7 +116,7 @@ public class SignInActivity extends AppCompatActivity {
     private void adminLogin() {
         helpers.showLoader(this);
 
-        DocumentReference docRef = db.collection("admins").document(etUserId.getText().toString());
+        DocumentReference docRef = db.collection(AppConstant.UserTypeAdmin).document(etUserId.getText().toString());
         docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -127,7 +129,7 @@ public class SignInActivity extends AppCompatActivity {
                         if (user.getPassword().equals(etUserPassword.getText().toString())) {
 
                             helpers.print(user.toString());
-                            SessionManager.getInstance(SignInActivity.this).createUserLoginSession(user);
+                            SessionManager.getInstance(SignInActivity.this).createAdminUserLoginSession(user);
                             gotoDashBoard();
                         } else {
                             Snackbar.make(activity, "Wrong user id or password", Snackbar.LENGTH_LONG).show();
@@ -146,30 +148,77 @@ public class SignInActivity extends AppCompatActivity {
             }
         });
 
-       /* db
-                .collection("admins")
-
-                .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                    helpers.hideLoader();
-                if (task.isSuccessful()) {
-                    for (QueryDocumentSnapshot document : task.getResult()) {
-
-                    }
-                } else {
-
-                }
-            }
-        });*/
-
     }
 
     private void kitchenLogin() {
+        helpers.showLoader(this);
+
+        DocumentReference docRef = db.collection(AppConstant.UserTypeKitchen).document(etUserId.getText().toString());
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                helpers.hideLoader();
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+
+                        ModelKitchenUser user = document.toObject(ModelKitchenUser.class);
+                        if (user.getPassword().equals(etUserPassword.getText().toString())) {
+
+                            helpers.print(user.toString());
+                            SessionManager.getInstance(SignInActivity.this).createKitchenUserLoginSession(user);
+                            gotoDashBoard();
+                        } else {
+                            Snackbar.make(activity, "Wrong user id or password", Snackbar.LENGTH_LONG).show();
+
+                        }
+
+
+                    } else {
+                        Snackbar.make(activity, "Wrong user id or password", Snackbar.LENGTH_LONG).show();
+                    }
+                } else {
+                    Snackbar.make(activity, task.getException().toString(), Snackbar.LENGTH_LONG).show();
+
+
+                }
+            }
+        });
 
     }
 
     private void userLogin() {
+        helpers.showLoader(this);
+        DocumentReference docRef = db.collection(AppConstant.UserTypeUser).document(etUserId.getText().toString());
+        docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                helpers.hideLoader();
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
 
+                        ModelUserTypeUser user = document.toObject(ModelUserTypeUser.class);
+                        if (user.getPassword().equals(etUserPassword.getText().toString())) {
+
+                            helpers.print(user.toString());
+                            SessionManager.getInstance(SignInActivity.this).createUserTypeUserLoginSession(user);
+                            gotoDashBoard();
+                        } else {
+                            Snackbar.make(activity, "Wrong user id or password", Snackbar.LENGTH_LONG).show();
+
+                        }
+
+
+                    } else {
+                        Snackbar.make(activity, "Wrong user id or password", Snackbar.LENGTH_LONG).show();
+                    }
+                } else {
+                    Snackbar.make(activity, task.getException().toString(), Snackbar.LENGTH_LONG).show();
+
+
+                }
+            }
+        });
     }
 }

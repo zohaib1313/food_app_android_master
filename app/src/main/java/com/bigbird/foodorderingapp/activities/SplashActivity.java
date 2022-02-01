@@ -14,6 +14,7 @@ import com.bigbird.foodorderingapp.activities.kitchen_owner.KitchenOwnerDashboar
 import com.bigbird.foodorderingapp.activities.user.UserDashboardActivity;
 import com.bigbird.foodorderingapp.models.ModelAdminUser;
 import com.bigbird.foodorderingapp.utils.SessionManager;
+import com.bigbird.foodorderingapp.utils.helpers;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -35,28 +36,34 @@ public class SplashActivity extends AppCompatActivity {
                 Intent mainIntent;
                 if (SessionManager.getInstance(SplashActivity.this).isLoggedIn()) {
 
-                    ModelAdminUser user = SessionManager.getInstance(SplashActivity.this).getUser();
-                    switch (user.getType()) {
+                    String type = SessionManager.getInstance(SplashActivity.this).getType();
+                    helpers.print("**********user type="+type.toString()+"************");
+                    if(type!=null) {
+                        switch (type) {
 
-                        case "UserTypeUser":
-                            mainIntent = new Intent(SplashActivity.this, UserDashboardActivity.class);
+                            case "UserTypeUser":
+                                mainIntent = new Intent(SplashActivity.this, UserDashboardActivity.class);
 
-                            break;
-                        case "UserTypeKitchen":
-                            mainIntent = new Intent(SplashActivity.this, KitchenOwnerDashboardActivity.class);
+                                break;
+                            case "UserTypeKitchen":
+                                mainIntent = new Intent(SplashActivity.this, KitchenOwnerDashboardActivity.class);
 
-                            break;
-                        case "UserTypeAdmin":
-                            mainIntent = new Intent(SplashActivity.this, AdminDashboardActivity.class);
+                                break;
+                            case "UserTypeAdmin":
+                                mainIntent = new Intent(SplashActivity.this, AdminDashboardActivity.class);
 
-                            break;
-                        default:
-                            mainIntent = new Intent(SplashActivity.this, UserDashboardActivity.class);
+                                break;
+                            default:
+                                mainIntent = new Intent(SplashActivity.this, UserDashboardActivity.class);
+
+                        }
+
+                    }else {
+                        mainIntent = new Intent(SplashActivity.this, ChooseUserLoginTypeActivity.class);
 
                     }
-
-
                 } else {
+                    helpers.print("**********not previous login************");
                     mainIntent = new Intent(SplashActivity.this, ChooseUserLoginTypeActivity.class);
                 }
                 startActivity(mainIntent);

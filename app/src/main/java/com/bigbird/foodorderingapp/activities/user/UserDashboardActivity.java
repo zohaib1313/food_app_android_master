@@ -10,8 +10,11 @@ import android.view.View;
 import android.widget.Button;
 
 import com.bigbird.foodorderingapp.R;
+import com.bigbird.foodorderingapp.activities.ChooseUserLoginTypeActivity;
 import com.bigbird.foodorderingapp.activities.SignInActivity;
+import com.bigbird.foodorderingapp.activities.kitchen_owner.KitchenOwnerDashboardActivity;
 import com.bigbird.foodorderingapp.models.ProductItemModel;
+import com.bigbird.foodorderingapp.utils.SessionManager;
 
 import java.util.ArrayList;
 
@@ -50,5 +53,12 @@ public class UserDashboardActivity extends AppCompatActivity {
     }
 
     public void scheduleLater(View view) {
+    }
+
+    public void logout(View view) {
+        SessionManager.getInstance(UserDashboardActivity.this).clearSession();
+        Intent intent = new Intent(UserDashboardActivity.this, ChooseUserLoginTypeActivity.class);
+        startActivity(intent);
+        finish();
     }
 }

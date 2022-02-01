@@ -13,10 +13,14 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.bigbird.foodorderingapp.R;
+import com.bigbird.foodorderingapp.activities.ChooseUserLoginTypeActivity;
+import com.bigbird.foodorderingapp.activities.admin.AdminDashboardActivity;
 import com.bigbird.foodorderingapp.activities.user.OrderPlacedWaitActivity;
 import com.bigbird.foodorderingapp.activities.user.UserCartAdapter;
 import com.bigbird.foodorderingapp.activities.user.UserDashboardActivity;
 import com.bigbird.foodorderingapp.models.ProductItemModel;
+import com.bigbird.foodorderingapp.utils.SPManager;
+import com.bigbird.foodorderingapp.utils.SessionManager;
 
 import java.util.ArrayList;
 
@@ -28,25 +32,11 @@ public class KitchenOwnerDashboardActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().setTitle("Kitchen");
+        getSupportActionBar().setTitle(SessionManager.getInstance(this).getKitchenUser().getName()
+                +"'s "+ "Kitchen");
         setContentView(R.layout.activity_kitchen_owner_dashboard);
         rvKitchen = findViewById(R.id.rvKitchen);
         rvKitchen.setLayoutManager(new LinearLayoutManager(this));
-        modelArrayList.add(new ProductItemModel("1", "Burger", 10.2, 0));
-        modelArrayList.add(new ProductItemModel("1", "Burger", 10.2, 0));
-        modelArrayList.add(new ProductItemModel("1", "Burger", 10.2, 0));
-        modelArrayList.add(new ProductItemModel("1", "Burger", 10.2, 0));
-        modelArrayList.add(new ProductItemModel("1", "Burger", 10.2, 0));
-        modelArrayList.add(new ProductItemModel("1", "Burger", 10.2, 0));
-        modelArrayList.add(new ProductItemModel("1", "Burger", 10.2, 0));
-        modelArrayList.add(new ProductItemModel("1", "Burger", 10.2, 0));
-        modelArrayList.add(new ProductItemModel("1", "Burger", 10.2, 0));
-        modelArrayList.add(new ProductItemModel("1", "Burger", 10.2, 0));
-        modelArrayList.add(new ProductItemModel("1", "Burger", 10.2, 0));
-        modelArrayList.add(new ProductItemModel("1", "Burger", 10.2, 0));
-        modelArrayList.add(new ProductItemModel("1", "Burger", 10.2, 0));
-        modelArrayList.add(new ProductItemModel("1", "Burger", 10.2, 0));
-
         kitchenAdapter = new KitchenAdapter(modelArrayList, this);
         rvKitchen.setAdapter(kitchenAdapter);
         kitchenAdapter.notifyDataSetChanged();
@@ -57,6 +47,13 @@ public class KitchenOwnerDashboardActivity extends AppCompatActivity {
 
         Intent intent = new Intent(KitchenOwnerDashboardActivity.this, AddNewDishDialog.class);
         startActivity(intent);
+    }
+
+    public void logout(View view) {
+        SessionManager.getInstance(KitchenOwnerDashboardActivity.this).clearSession();
+        Intent intent = new Intent(KitchenOwnerDashboardActivity.this, ChooseUserLoginTypeActivity.class);
+        startActivity(intent);
+        finish();
     }
 
  /*   public void showDialogg(Activity activity){

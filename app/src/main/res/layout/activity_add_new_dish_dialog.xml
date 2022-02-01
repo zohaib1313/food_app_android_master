@@ -5,9 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
+    android:id="@+id/add_new_dish_dialog"
+    android:background="@android:color/transparent"
     android:gravity="center"
     android:orientation="vertical"
-    android:background="@android:color/transparent"
     android:padding="@dimen/_18sdp">
 
     <LinearLayout
@@ -32,7 +33,7 @@
 
 
         <EditText
-            android:id="@+id/textInputEditText"
+            android:id="@+id/etDishName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
 
@@ -40,11 +41,11 @@
             android:maxLines="1" />
 
         <EditText
-            android:id="@+id/etPrice"
+            android:id="@+id/etDishPrice"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             android:hint="Price"
+            android:inputType="number"
             android:maxLines="1" />
 
         <LinearLayout
@@ -58,17 +59,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Add"
-
-                />
+                android:onClick="addDish"
+                android:text="Add" />
 
             <soup.neumorphism.NeumorphButton
                 android:id="@+id/btnCancel"
                 style="@style/ButtonShape"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
                 android:layout_weight="1"
+                android:onClick="cancel"
                 android:text="Cancel"
 
                 />

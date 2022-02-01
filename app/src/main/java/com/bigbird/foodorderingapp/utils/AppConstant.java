@@ -10,6 +10,6 @@ public class AppConstant {
     public static String UserTypeAdmin="UserTypeAdmin";
 
 
-
+    public static String Dishes="Dishes";
 }
 

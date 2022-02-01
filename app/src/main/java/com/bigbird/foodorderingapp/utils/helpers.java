@@ -15,7 +15,7 @@ public class helpers {
 
     public static void print(String message) {
 
-        Log.d(TAG, message);
+        Log.d(TAG, "\n***********"+message+"***********\n");
     }
 
    static ProgressDialog pd;

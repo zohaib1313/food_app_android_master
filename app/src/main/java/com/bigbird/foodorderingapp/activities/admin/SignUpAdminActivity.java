@@ -9,6 +9,7 @@ import android.widget.EditText;
 
 import com.bigbird.foodorderingapp.R;
 import com.bigbird.foodorderingapp.models.ModelAdminUser;
+import com.bigbird.foodorderingapp.utils.AppConstant;
 import com.bigbird.foodorderingapp.utils.helpers;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -44,12 +45,12 @@ public class SignUpAdminActivity extends AppCompatActivity {
             user.setContact(etContact.getText().toString());
             user.setEmail(etEmail.getText().toString());
             user.setLocation(etLocation.getText().toString());
-            user.setPassword(etName.getText().toString());
+            user.setPassword(etPassword.getText().toString());
             user.setType("UserTypeAdmin");
             helpers.showLoader(this);
 
             //check if user does exists already or not
-            DocumentReference docRef = db.collection("admins").document(etEmail.getText().toString());
+            DocumentReference docRef = db.collection(AppConstant.UserTypeAdmin).document(etEmail.getText().toString());
             docRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override
                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -64,7 +65,7 @@ public class SignUpAdminActivity extends AppCompatActivity {
                                 Snackbar.make(activity, "User with email already exists", Snackbar.LENGTH_LONG).show();
 
                         } else {
-                            db.collection("admins").document(etEmail.getText().toString()).set(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            db.collection(AppConstant.UserTypeAdmin).document(etEmail.getText().toString()).set(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     helpers.hideLoader();
