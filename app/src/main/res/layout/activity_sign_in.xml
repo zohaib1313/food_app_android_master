@@ -5,10 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="@dimen/_12sdp"
+    android:id="@+id/signInActivity"
     tools:context=".activities.SignInActivity">
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/etPhoneNumber"
+        android:id="@+id/etUserId"
         style="@style/AppTextViewNormal"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -17,8 +18,6 @@
         android:layout_weight="2"
         android:hint="user id"
         android:imeOptions="actionDone"
-
-        android:maxLength="10"
         android:maxLines="1"
         android:textAlignment="viewStart"
         android:textColor="@color/black"
@@ -35,7 +34,7 @@
         android:layout_height="wrap_content"
         android:gravity="start"
         android:text="User Id:"
-        app:layout_constraintEnd_toStartOf="@+id/etPhoneNumber"
+        app:layout_constraintEnd_toStartOf="@+id/etUserId"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline4" />
 
@@ -66,7 +65,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <com.google.android.material.textfield.TextInputEditText
-
+android:id="@+id/etPassword"
         style="@style/AppTextViewNormal"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -74,15 +73,13 @@
         android:layout_weight="2"
         android:hint="password"
         android:imeOptions="actionDone"
-
-        android:maxLength="10"
         android:maxLines="1"
         android:textAlignment="viewStart"
         android:textColor="@color/black"
 
         app:layout_constraintBottom_toBottomOf="@+id/textView3"
-        app:layout_constraintEnd_toEndOf="@+id/etPhoneNumber"
-        app:layout_constraintStart_toStartOf="@+id/etPhoneNumber"
+        app:layout_constraintEnd_toEndOf="@+id/etUserId"
+        app:layout_constraintStart_toStartOf="@+id/etUserId"
         app:layout_constraintTop_toTopOf="@+id/textView3"
         tools:ignore="RtlCompat" />
 
@@ -98,7 +95,7 @@
         android:layout_width="match_parent"
 
         android:layout_height="@dimen/_40sdp"
-        android:onClick="gotoDashBoard"
+        android:onClick="login"
 
         android:src="@drawable/login_btn"
         app:layout_constraintEnd_toEndOf="parent"

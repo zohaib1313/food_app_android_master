@@ -3,7 +3,7 @@ package com.bigbird.foodorderingapp.utils;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.bigbird.foodorderingapp.models.ModelUser;
+import com.bigbird.foodorderingapp.models.ModelAdminUser;
 import com.google.gson.Gson;
 
 
@@ -14,7 +14,7 @@ public class SessionManager {
     // Editor for Shared preferences
     SharedPreferences.Editor editor;
     SPManager mSPManager;
-    ModelUser user = null;
+    ModelAdminUser user = null;
     // Context
     Context mContext;
     // Shared pref mode
@@ -58,12 +58,14 @@ public class SessionManager {
     //
     public void clearSession() {
         editor.clear();
+        editor.putBoolean(AppConstant.KEY_IS_LOGGED_IN, false);
+
         editor.commit();
 
     }
 
 
-    public void createUserLoginSession(ModelUser user) {
+    public void createUserLoginSession(ModelAdminUser user) {
         clearSession();
         // Storing login value as TRUE
         editor.putBoolean(AppConstant.KEY_IS_LOGGED_IN, true);
@@ -79,7 +81,7 @@ public class SessionManager {
 //
 //
 //
-    public void updateUserSession(ModelUser user) {
+    public void updateUserSession(ModelAdminUser user) {
         this.user = user;
         // Storing login value as TRUE
         Gson gson = new Gson();
@@ -94,11 +96,11 @@ public class SessionManager {
 
     //
 //
-    public ModelUser getUser() {
+    public ModelAdminUser getUser() {
         if (user == null) {
             String str = pref.getString(AppConstant.USER_INFO, null);
             if (str != null) {
-                user = new Gson().fromJson(str, ModelUser.class);
+                user = new Gson().fromJson(str, ModelAdminUser.class);
             }
         }
         return user;

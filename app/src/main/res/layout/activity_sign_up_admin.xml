@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:id="@+id/adminSignUp"
     android:layout_height="match_parent"
     tools:context=".activities.admin.SignUpAdminActivity">
 
@@ -56,6 +57,7 @@
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
+                    android:id="@+id/etName"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:hint=""
@@ -77,6 +79,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:id="@+id/etContact"
+
                     android:hint=""
                     android:maxLines="1" />
             </LinearLayout>
@@ -97,6 +101,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:hint=""
+                    android:id="@+id/etMail"
+
                     android:maxLines="1" />
             </LinearLayout>
             <LinearLayout
@@ -117,10 +123,34 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:id="@+id/etLocation"
+
                     android:hint=""
                     android:maxLines="1" />
             </LinearLayout>
+            <LinearLayout
+                android:layout_gravity="bottom"
+                android:gravity="bottom"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="@dimen/_20sdp"
+                android:orientation="horizontal">
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:text="Password:" />
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint=""
+                    android:id="@+id/etPassword"
+
+                    android:maxLines="1" />
+            </LinearLayout>
         </LinearLayout>
 
 
@@ -140,6 +170,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="SIGN UP"
+        android:onClick="signUpAdmin"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
