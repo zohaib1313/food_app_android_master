@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingTop="@dimen/_8sdp"
+    android:id="@+id/activityUser"
     android:paddingStart="@dimen/_8sdp"
     android:paddingEnd="@dimen/_8sdp"
     tools:context=".activities.user.UserDashboardActivity">
@@ -60,6 +61,7 @@
                 android:textSize="@dimen/_12sdp" />
 
             <TextView
+                android:id="@+id/etTotalPrice"
                 style="@style/AppTextViewBold"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -67,7 +69,7 @@
                 android:layout_marginEnd="@dimen/_50sdp"
                 android:maxLines="1"
                 android:padding="@dimen/_12sdp"
-                android:text="2400 pkr"
+                android:text=""
                 android:textSize="@dimen/_12sdp" />
         </LinearLayout>
 

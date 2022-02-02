@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bigbird.foodorderingapp.R;
 import com.bigbird.foodorderingapp.models.ProductItemModel;
+import com.bigbird.foodorderingapp.utils.IOnItemClickListener;
 
 import java.util.ArrayList;
 
@@ -18,8 +19,11 @@ public class KitchenAdapter extends RecyclerView.Adapter<KitchenAdapter.MyViewHo
 
     ArrayList<ProductItemModel> productItemModelArrayList;
     Context myContext;
+    IOnItemClickListener iOnItemClickListener;
 
-
+    public void setiOnItemClickListener(IOnItemClickListener iOnItemClickListener) {
+        this.iOnItemClickListener = iOnItemClickListener;
+    }
 
     public KitchenAdapter(ArrayList<ProductItemModel> productItemModelArrayList, Context myContext) {
         this.productItemModelArrayList = productItemModelArrayList;
@@ -40,7 +44,12 @@ public class KitchenAdapter extends RecyclerView.Adapter<KitchenAdapter.MyViewHo
         holder.tvName.setText(itemModel.getName());
         holder.tvPrice.setText("Price: " + itemModel.getPrice().toString());
 
-
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                iOnItemClickListener.onItemClick(position);
+            }
+        });
 
     }
 

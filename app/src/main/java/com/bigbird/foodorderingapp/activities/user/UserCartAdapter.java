@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bigbird.foodorderingapp.R;
 import com.bigbird.foodorderingapp.models.ProductItemModel;
+import com.bigbird.foodorderingapp.utils.IOnItemClickListener;
 
 import java.util.ArrayList;
 
@@ -19,8 +20,16 @@ public class UserCartAdapter extends RecyclerView.Adapter<UserCartAdapter.MyView
 
     ArrayList<ProductItemModel> productItemModelArrayList;
     Context myContext;
+    IOnItemClickListener addClickListener;
+    IOnItemClickListener removeClickListener;
 
+    public void setAddClickListener(IOnItemClickListener addClickListener) {
+        this.addClickListener = addClickListener;
+    }
 
+    public void setRemoveClickListener(IOnItemClickListener removeClickListener) {
+        this.removeClickListener = removeClickListener;
+    }
 
     public UserCartAdapter(ArrayList<ProductItemModel> productItemModelArrayList, Context myContext) {
         this.productItemModelArrayList = productItemModelArrayList;
@@ -41,16 +50,16 @@ public class UserCartAdapter extends RecyclerView.Adapter<UserCartAdapter.MyView
         holder.tvName.setText(itemModel.getName());
         holder.tvPrice.setText("Price: " + itemModel.getPrice().toString());
         holder.tvCounts.setText(itemModel.getCount() + "");
-       holder.tvIncrease.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View view) {
-               
-           }
-       });
+        holder.tvIncrease.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addClickListener.onItemClick(position);
+            }
+        });
         holder.tvDecrease.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                removeClickListener.onItemClick(position);
             }
         });
 
