@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -51,8 +52,6 @@ public class KitchenOwnerDashboardActivity extends AppCompatActivity {
     FirebaseFirestore db;
     private ModelKitchenUser modelKitchenUser;
     View activity;
-
-
 
 
     @Override
@@ -112,8 +111,9 @@ public class KitchenOwnerDashboardActivity extends AppCompatActivity {
                                 helpers.hideLoader();
                                 helpers.print("Success Delete");
                                 helpers.showSnackBar(activity, "Deletion Success");
-
-                                loadData();
+                                modelArrayList.remove(position);
+                                kitchenAdapter.notifyDataSetChanged();
+                                //loadData();
                             }
                         })
                         .addOnFailureListener(new OnFailureListener() {
@@ -142,8 +142,7 @@ public class KitchenOwnerDashboardActivity extends AppCompatActivity {
 
     void loadData() {
         db.collection(AppConstant.Dishes)
-                .document(modelKitchenUser.getEmail())
-                .collection(modelKitchenUser.getEmail())
+                .whereEqualTo("ownerId", modelKitchenUser.getEmail())
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot snapshots,
@@ -152,16 +151,24 @@ public class KitchenOwnerDashboardActivity extends AppCompatActivity {
                             helpers.print("listen:error " + e.getLocalizedMessage());
                             return;
                         }
-                        modelArrayList.clear();
+                        //   modelArrayList.clear();
                         for (DocumentChange dc : snapshots.getDocumentChanges()) {
                             if (dc.getType() == DocumentChange.Type.ADDED) {
+                                helpers.print("Item added");
                                 ProductItemModel itemModel = dc.getDocument().toObject(ProductItemModel.class);
                                 helpers.print(itemModel.toString());
                                 modelArrayList.add(itemModel);
+                                kitchenAdapter.notifyDataSetChanged();
 
                             }
+//                            else if (dc.getType() == DocumentChange.Type.REMOVED) {
+//                                ProductItemModel itemModel = dc.getDocument().toObject(ProductItemModel.class);
+//                                helpers.print("Item removed");
+//                                modelArrayList.remove(itemModel);
+//                                kitchenAdapter.notifyDataSetChanged();
+//
+//                            }
                         }
-                        kitchenAdapter.notifyDataSetChanged();
                     }
                 });
     }

@@ -1,109 +1,120 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.omadahealth.github.swipyrefreshlayout.library.SwipyRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_admin_dashboardId"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingTop="@dimen/_8sdp"
     android:paddingStart="@dimen/_8sdp"
+    android:paddingTop="@dimen/_8sdp"
+
     android:paddingEnd="@dimen/_8sdp"
     tools:context=".activities.admin.AdminDashboardActivity">
 
-    <com.factor.bouncy.BouncyRecyclerView
-        android:id="@+id/rvAdmin"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:allow_drag_reorder="true"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView7"
-        app:recyclerview_damping_ratio="DAMPING_RATIO_LOW_BOUNCY"
-        app:recyclerview_fling_animation_size=".7"
-        app:recyclerview_overscroll_animation_size=".7"
-        app:recyclerview_stiffness="STIFFNESS_MEDIUM"
-        tools:listitem="@layout/row_dish" />
+        android:layout_height="match_parent"
+        android:paddingStart="@dimen/_8sdp"
+        android:paddingTop="@dimen/_8sdp"
+        android:paddingEnd="@dimen/_8sdp">
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/layout_bg"
-
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
-
-        >
+        <com.factor.bouncy.BouncyRecyclerView
+            android:id="@+id/rvAdmin"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:allow_drag_reorder="true"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView7"
+            app:recyclerview_damping_ratio="DAMPING_RATIO_LOW_BOUNCY"
+            app:recyclerview_fling_animation_size=".7"
+            app:recyclerview_overscroll_animation_size=".7"
+            app:recyclerview_stiffness="STIFFNESS_LOW"
+            tools:listitem="@layout/row_dish" />
 
         <LinearLayout
+            android:id="@+id/linearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingTop="@dimen/_30sdp"
-            android:paddingBottom="@dimen/_20sdp">
+            android:background="@drawable/layout_bg"
 
-            <TextView
-                style="@style/AppTextViewBold"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
 
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+            >
 
-
-                android:layout_gravity="center"
-
-                android:gravity="start"
-                android:padding="@dimen/_12sdp"
-                android:text="Verify User:"
-                android:textSize="@dimen/_12sdp" />
-
-            <EditText
-                style="@style/AppTextViewBold"
-
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="@dimen/_30sdp"
+                android:paddingBottom="@dimen/_20sdp">
+
+                <TextView
+                    style="@style/AppTextViewBold"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
 
 
-                android:layout_gravity="center"
-                android:layout_weight="5"
+                    android:layout_gravity="center"
+                    android:gravity="start"
+                    android:padding="@dimen/_12sdp"
+                    android:text="Verify User:"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_12sdp" />
 
-                android:hint="Enter username"
-                android:maxLines="1"
-                android:padding="@dimen/_10sdp"
-                android:textSize="@dimen/_12sdp" />
+                <EditText
+                    android:id="@+id/etUserNameKit"
+                    style="@style/AppTextViewBold"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_weight="5"
 
-            <ImageView
-                android:layout_width="@dimen/_160sdp"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"
-                android:layout_margin="@dimen/_4sdp"
-                android:layout_weight="3"
-                android:src="@drawable/done_btn" />
+                    android:hint="Enter username"
+                    android:maxLines="1"
+
+                    android:padding="@dimen/_10sdp"
+                    android:textColor="@color/white"
+                    android:textColorHint="@color/white"
+                    android:textSize="@dimen/_12sdp" />
+
+                <ImageView
+                    android:layout_width="@dimen/_160sdp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center"
+                    android:layout_margin="@dimen/_4sdp"
+                    android:layout_weight="3"
+                    android:onClick="done"
+                    android:src="@drawable/done_btn" />
+            </LinearLayout>
+
+
         </LinearLayout>
 
-
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/textView7"
-        style="@style/AppTextViewBold"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_4sdp"
-        android:text="Dashboard"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/textView7"
+            style="@style/AppTextViewBold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:text="Dashboard"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:onClick="logout"
+            app:layout_constraintBottom_toTopOf="@+id/rvAdmin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textView7"
+            app:srcCompat="@drawable/ic_baseline_exit_to_app_24" />
 
-    <ImageView
-        android:onClick="logout"
-        android:id="@+id/imageView2"
-        android:layout_width="@dimen/_30sdp"
-        android:layout_height="@dimen/_30sdp"
-        app:layout_constraintBottom_toTopOf="@+id/rvAdmin"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView7"
-        app:srcCompat="@drawable/ic_baseline_exit_to_app_24" />
 
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.omadahealth.github.swipyrefreshlayout.library.SwipyRefreshLayout>

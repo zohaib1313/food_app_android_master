@@ -17,7 +17,9 @@ import android.widget.ImageView;
 import com.bigbird.foodorderingapp.R;
 import com.bigbird.foodorderingapp.activities.admin.SignUpAdminActivity;
 import com.bigbird.foodorderingapp.models.ModelKitchenUser;
+import com.bigbird.foodorderingapp.utils.AppConstant;
 import com.bigbird.foodorderingapp.utils.helpers;
+import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -32,6 +34,7 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 
 public class SignUpKitchenOwnerActivity extends AppCompatActivity {
     View activity;
@@ -83,6 +86,7 @@ public class SignUpKitchenOwnerActivity extends AppCompatActivity {
             ModelKitchenUser modelKitchenUser = new ModelKitchenUser();
             modelKitchenUser.setName(etName.getText().toString());
             modelKitchenUser.setType("UserTypeKitchen");
+            modelKitchenUser.setApproved(false);
             modelKitchenUser.setContact(etContact.getText().toString());
             modelKitchenUser.setRestaurantName(etRestaurantName.getText().toString());
             modelKitchenUser.setRestaurantLocation(getEtRestaurantLocation.getText().toString());
@@ -101,7 +105,7 @@ public class SignUpKitchenOwnerActivity extends AppCompatActivity {
                             helpers.hideLoader();
                             Snackbar.make(activity, "User with email already exists", Snackbar.LENGTH_LONG).show();
                         } else {
-                            uploadFile(true,false, modelKitchenUser, frontImage, modelKitchenUser.getEmail(), "FrontImageCnic");
+                            uploadFile(true, false, modelKitchenUser, frontImage, modelKitchenUser.getEmail(), "FrontImageCnic");
 
                         }
                     } else {
@@ -110,7 +114,6 @@ public class SignUpKitchenOwnerActivity extends AppCompatActivity {
                     }
                 }
             });
-
 
 
         }
@@ -150,7 +153,7 @@ public class SignUpKitchenOwnerActivity extends AppCompatActivity {
 
     @SuppressLint("IntentReset")
     public void pickImage(int requestCode) {
-        Intent intent = new Intent(Intent.ACTION_PICK,
+   /*     Intent intent = new Intent(Intent.ACTION_PICK,
                 MediaStore.Images.Media.INTERNAL_CONTENT_URI);
         intent.setType("image/*");
         intent.putExtra("crop", "true");
@@ -160,7 +163,15 @@ public class SignUpKitchenOwnerActivity extends AppCompatActivity {
         intent.putExtra("aspectX", 1);
         intent.putExtra("aspectY", 1);
         intent.putExtra("return-data", true);
-        startActivityForResult(intent, requestCode);
+        startActivityForResult(intent, requestCode);*/
+
+        ImagePicker.with(this)
+
+                .crop()	    			//Crop image(Optional), Check Customization for more option
+                .compress(1024)			//Final image size will be less than 1 MB(Optional)
+                .maxResultSize(1080, 1080)
+                //Final image resolution will be less than 1080 x 1080(Optional)
+                .start(requestCode);
     }
 
     @Override
@@ -169,34 +180,40 @@ public class SignUpKitchenOwnerActivity extends AppCompatActivity {
         helpers.print("on result image " + requestCode + " :: " + resultCode);
 
         if (resultCode == RESULT_OK && requestCode == 1) {
-            final Bundle extras = data.getExtras();
-            if (extras != null) {
-                //Get image
+            helpers.print("front success ");
 
-                frontImage = extras.getParcelable("data");
-                ivCnicFron.setImageBitmap(frontImage);
-                helpers.print("front image " + frontImage.toString());
+
+                try {
+                    frontImage = MediaStore.Images.Media.getBitmap(this.getContentResolver(), data.getData());
+                    ivCnicFron.setImageBitmap(frontImage);
+                    helpers.print("front image " + frontImage.toString());
+
+                } catch (IOException e) {
+                    helpers.print(e.getLocalizedMessage());
+
             }
         } else if (resultCode == RESULT_OK && requestCode == 2) {
             final Bundle extras = data.getExtras();
-            if (extras != null) {
-                //Get image
 
-                backImage = extras.getParcelable("data");
-                ivCnicBack.setImageBitmap(backImage);
-                helpers.print("back image " + backImage.toString());
+                try {
+                    backImage = MediaStore.Images.Media.getBitmap(this.getContentResolver(), data.getData());
+                    ivCnicBack.setImageBitmap(backImage);
+                    helpers.print("front image " + backImage.toString());
 
-            }
+                } catch (IOException e) {
+                    helpers.print(e.getLocalizedMessage());
+                }
+
         }
 
     }
 
 
-    private void uploadFile(boolean isFront,boolean isDone, ModelKitchenUser modelKitchenUser, Bitmap bitmap, String name, String ref) {
+    private void uploadFile(boolean isFront, boolean isDone, ModelKitchenUser modelKitchenUser, Bitmap bitmap, String name, String ref) {
         helpers.showLoader(SignUpKitchenOwnerActivity.this);
         FirebaseStorage storage = FirebaseStorage.getInstance();
-        StorageReference storageRef = storage.getReferenceFromUrl("gs://foodorderingapp-49cb0.appspot.com/");
-        StorageReference mountainImagesRef = storageRef.child(modelKitchenUser.getEmail()+"/"+ref  + name + ".jpg");
+        StorageReference storageRef = storage.getReferenceFromUrl(AppConstant.storageRefROot);
+        StorageReference mountainImagesRef = storageRef.child(modelKitchenUser.getEmail() + "/" + ref + name + ".jpg");
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 20, baos);
         byte[] data = baos.toByteArray();
@@ -224,10 +241,10 @@ public class SignUpKitchenOwnerActivity extends AppCompatActivity {
                             } else {
                                 modelKitchenUser.setCninBack(task.getResult().toString());
                             }
-                            if(isDone){
+                            if (isDone) {
                                 uploadUserToFireStore(modelKitchenUser);
-                            }else{
-                            uploadFile(false,true, modelKitchenUser, backImage, modelKitchenUser.getEmail(), "BackImageCnic");
+                            } else {
+                                uploadFile(false, true, modelKitchenUser, backImage, modelKitchenUser.getEmail(), "BackImageCnic");
                             }
                         } else {
                             helpers.hideLoader();
@@ -251,7 +268,8 @@ public class SignUpKitchenOwnerActivity extends AppCompatActivity {
                 helpers.hideLoader();
                 if (task.isSuccessful()) {
                     // Snackbar.make(activity, "User created successfully", Snackbar.LENGTH_LONG).show();
-                    helpers.showDialog(SignUpKitchenOwnerActivity.this, "User created successfully go to login");
+                    helpers.gotoLogin(SignUpKitchenOwnerActivity.this, "User created successfully go to login");
+
                 } else {
                     Snackbar.make(activity, "User creation failed", Snackbar.LENGTH_LONG).show();
                 }

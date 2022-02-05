@@ -11,5 +11,8 @@ public class AppConstant {
 
 
     public static String Dishes="Dishes";
+    public static String Orders="Orders";
+
+    public static String storageRefROot="gs://foodorderingapp-49cb0.appspot.com/";
 }
 

@@ -56,6 +56,8 @@
                 android:layout_marginStart="@dimen/_50sdp"
                 android:layout_marginTop="@dimen/_20sdp"
                 android:gravity="start"
+                android:textColor="@color/white"
+
                 android:padding="@dimen/_12sdp"
                 android:text="Total Price:"
                 android:textSize="@dimen/_12sdp" />
@@ -68,6 +70,7 @@
                 android:layout_marginTop="@dimen/_20sdp"
                 android:layout_marginEnd="@dimen/_50sdp"
                 android:maxLines="1"
+android:textColor="@color/white"
                 android:padding="@dimen/_12sdp"
                 android:text=""
                 android:textSize="@dimen/_12sdp" />

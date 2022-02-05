@@ -2,15 +2,19 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.bigbird.foodorderingapp">
 
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FoodOrderingApp">
-        <activity android:name=".activities.kitchen_owner.AddNewDishDialog"></activity>
+        <activity android:name=".activities.user.ScheduleOrderUserActivity"></activity>
+        <activity android:name=".activities.kitchen_owner.AddNewDishDialog" />
         <activity android:name=".activities.user.OrderPlacedWaitActivity" />
         <activity android:name=".activities.user.UserDashboardActivity" />
         <activity android:name=".activities.kitchen_owner.KitchenOwnerDashboardActivity" />

@@ -62,7 +62,7 @@ public class SignUpAdminActivity extends AppCompatActivity {
 
                         if (document.exists()) {
                             helpers.hideLoader();
-                                Snackbar.make(activity, "User with email already exists", Snackbar.LENGTH_LONG).show();
+                            Snackbar.make(activity, "User with email already exists", Snackbar.LENGTH_LONG).show();
 
                         } else {
                             db.collection(AppConstant.UserTypeAdmin).document(etEmail.getText().toString()).set(user).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -71,7 +71,8 @@ public class SignUpAdminActivity extends AppCompatActivity {
                                     helpers.hideLoader();
                                     if (task.isSuccessful()) {
                                         // Snackbar.make(activity, "User created successfully", Snackbar.LENGTH_LONG).show();
-                                        helpers.showDialog(SignUpAdminActivity.this, "User created successfully go to login");
+                                        helpers.gotoLogin(SignUpAdminActivity.this, "User created successfully go to login");
+
                                     } else {
                                         Snackbar.make(activity, "User creation failed", Snackbar.LENGTH_LONG).show();
                                     }
@@ -84,7 +85,6 @@ public class SignUpAdminActivity extends AppCompatActivity {
                     }
                 }
             });
-
 
 
         }

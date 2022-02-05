@@ -1,10 +1,12 @@
 package com.bigbird.foodorderingapp.models;
 
 public class ModelKitchenUser {
-    String name,contact,email,restaurantName,restaurantLocation,cninFron,cninBack,password,type;
+    String name, contact, email, restaurantName, restaurantLocation, cninFron, cninBack, password, type;
+    boolean isApproved;
 
-    public ModelKitchenUser(String name, String contact, String email, String restaurantName, String restaurantLocation, String cninFron, String cninBack, String password, String type) {
+    public ModelKitchenUser(boolean isApproved, String name, String contact, String email, String restaurantName, String restaurantLocation, String cninFron, String cninBack, String password, String type) {
         this.name = name;
+        this.isApproved = isApproved;
         this.contact = contact;
         this.email = email;
         this.restaurantName = restaurantName;
@@ -16,6 +18,14 @@ public class ModelKitchenUser {
     }
 
     public ModelKitchenUser() {
+    }
+
+    public boolean isApproved() {
+        return isApproved;
+    }
+
+    public void setApproved(boolean approved) {
+        isApproved = approved;
     }
 
     public String getName() {
@@ -102,6 +112,8 @@ public class ModelKitchenUser {
                 ", cninBack='" + cninBack + '\'' +
                 ", password='" + password + '\'' +
                 ", type='" + type + '\'' +
+                ", isAPproved='" +isApproved + '\'' +
+
                 '}';
     }
 }

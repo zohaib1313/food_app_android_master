@@ -71,7 +71,7 @@ public class SignUpUserActivity extends AppCompatActivity {
                                     helpers.hideLoader();
                                     if (task.isSuccessful()) {
                                         // Snackbar.make(activity, "User created successfully", Snackbar.LENGTH_LONG).show();
-                                        helpers.showDialog(SignUpUserActivity.this, "User created successfully go to login");
+                                        helpers.gotoLogin(SignUpUserActivity.this, "User created successfully go to login");
                                     } else {
                                         Snackbar.make(activity, "User creation failed", Snackbar.LENGTH_LONG).show();
                                     }

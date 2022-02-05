@@ -12,8 +12,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bigbird.foodorderingapp.R;
 import com.bigbird.foodorderingapp.models.ProductItemModel;
 import com.bigbird.foodorderingapp.utils.IOnItemClickListener;
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class KitchenAdapter extends RecyclerView.Adapter<KitchenAdapter.MyViewHolder> {
 
@@ -43,7 +46,7 @@ public class KitchenAdapter extends RecyclerView.Adapter<KitchenAdapter.MyViewHo
         ProductItemModel itemModel = productItemModelArrayList.get(position);
         holder.tvName.setText(itemModel.getName());
         holder.tvPrice.setText("Price: " + itemModel.getPrice().toString());
-
+        Glide.with(myContext).load(itemModel.getImage()).into(holder.imageView);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -60,12 +63,12 @@ public class KitchenAdapter extends RecyclerView.Adapter<KitchenAdapter.MyViewHo
 
     static class MyViewHolder extends RecyclerView.ViewHolder {
         TextView tvName, tvPrice;
-
+       CircleImageView imageView;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             tvName = itemView.findViewById(R.id.tvName);
             tvPrice = itemView.findViewById(R.id.tvPrice);
-
+            imageView=itemView.findViewById(R.id.profile_image);
 
         }
     }

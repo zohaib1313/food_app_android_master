@@ -1,14 +1,20 @@
 package com.bigbird.foodorderingapp.models;
 
-public class ProductItemModel {
+import java.io.Serializable;
+
+public class ProductItemModel  implements Serializable {
 
     String id;
     String name;
     Double price;
+    String image;
     int count;
+    String ownerId;
 
-    public ProductItemModel(String id, String name, Double price, int count) {
+    public ProductItemModel(String image,String id, String name, Double price, int count,String ownerId) {
         this.id = id;
+        this.image=image;
+        this.ownerId=ownerId;
         this.name = name;
         this.price = price;
         this.count = count;
@@ -49,6 +55,22 @@ public class ProductItemModel {
         this.count = count;
     }
 
+    public String getOwnerId() {
+        return ownerId;
+    }
+
+    public void setOwnerId(String ownerId) {
+        this.ownerId = ownerId;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     @Override
     public String toString() {
         return "ProductItemModel{" +
@@ -56,6 +78,9 @@ public class ProductItemModel {
                 ", name='" + name + '\'' +
                 ", price=" + price +
                 ", count=" + count +
+                ", ownerId=" + ownerId +
+                ", image=" + image +
+
                 '}';
     }
 }

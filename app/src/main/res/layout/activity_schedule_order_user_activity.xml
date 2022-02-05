@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/schedule_order_activity"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingStart="@dimen/_8sdp"
+    android:paddingTop="@dimen/_8sdp"
+    android:paddingEnd="@dimen/_8sdp"
+    tools:context=".activities.user.ScheduleOrderUserActivity">
+
+
+    <TextView
+        android:id="@+id/textView7"
+        style="@style/AppTextViewBold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Dishes:"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/guideline11" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <TextView
+        android:id="@+id/dishCountSchedule"
+        style="@style/AppTextViewBold"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/app_color_gray23"
+        android:padding="@dimen/_8sdp"
+        android:textSize="@dimen/_12sdp"
+        android:text="100"
+        app:layout_constraintBottom_toBottomOf="@+id/textView7"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline10"
+        app:layout_constraintTop_toTopOf="@+id/textView7" />
+
+    <TextView
+        android:id="@+id/textView13"
+        style="@style/AppTextViewBold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Delivery Day:"
+        app:layout_constraintBottom_toBottomOf="@+id/pickDateSchedule"
+        app:layout_constraintStart_toStartOf="@+id/textView7"
+        app:layout_constraintTop_toTopOf="@+id/pickDateSchedule" />
+
+    <TextView
+        android:id="@+id/pickDateSchedule"
+        style="@style/AppTextViewBold"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:background="@color/app_color_gray23"
+        android:padding="@dimen/_8sdp"
+        android:textSize="@dimen/_12sdp"
+        android:text="Pick Date"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline10"
+        app:layout_constraintTop_toBottomOf="@+id/dishCountSchedule" />
+
+    <TextView
+        android:id="@+id/textView14"
+        style="@style/AppTextViewBold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Delivery Time:"
+        app:layout_constraintBottom_toBottomOf="@+id/pickTimeSchedule"
+        app:layout_constraintStart_toStartOf="@+id/textView13"
+        app:layout_constraintTop_toTopOf="@+id/pickTimeSchedule" />
+
+    <TextView
+        android:id="@+id/pickTimeSchedule"
+        style="@style/AppTextViewBold"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:background="@color/app_color_gray23"
+        android:padding="@dimen/_8sdp"
+        android:textSize="@dimen/_12sdp"
+        android:text="Pick Time"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline10"
+        app:layout_constraintTop_toBottomOf="@+id/pickDateSchedule" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.22" />
+
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Schedule Order"
+        style="@style/AppTextViewBold"
+android:textSize="@dimen/_20sdp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline11"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
+        android:onClick="doneSchedule"
+        android:layout_marginBottom="@dimen/_40sdp"
+        android:src="@drawable/done_btn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

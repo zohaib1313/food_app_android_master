@@ -4,6 +4,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -12,6 +14,7 @@ import android.widget.TextView;
 
 import com.bigbird.foodorderingapp.R;
 import com.bigbird.foodorderingapp.activities.ChooseUserLoginTypeActivity;
+import com.bigbird.foodorderingapp.models.ModelOrder;
 import com.bigbird.foodorderingapp.models.ModelUserTypeUser;
 import com.bigbird.foodorderingapp.models.ProductItemModel;
 import com.bigbird.foodorderingapp.utils.AppConstant;
@@ -20,9 +23,11 @@ import com.bigbird.foodorderingapp.utils.SessionManager;
 import com.bigbird.foodorderingapp.utils.helpers;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.Tasks;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.Source;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,6 +58,7 @@ public class UserDashboardActivity extends AppCompatActivity {
         activity = findViewById(R.id.activityUser);
         db = FirebaseFirestore.getInstance();
         getAllProducts();
+
 
         userCartAdapter.setAddClickListener(new IOnItemClickListener() {
             @Override
@@ -103,38 +109,24 @@ public class UserDashboardActivity extends AppCompatActivity {
         helpers.showLoader(activity.getContext());
         db
                 .collection(AppConstant.Dishes)
-                .get()
+                .get(Source.SERVER)
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            List<DocumentSnapshot> myListOfDocuments = task.getResult().getDocuments();
-                            for (DocumentSnapshot documentSnapshot : myListOfDocuments) {
-                                helpers.print(documentSnapshot.getData() + "");
-                                db
-                                        .collection(AppConstant.Dishes).document(documentSnapshot.getId())
-                                        .collection(documentSnapshot.getId()).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    public void onComplete(@NonNull Task<QuerySnapshot> task2) {
+                        helpers.hideLoader();
+                        if (task2.isSuccessful()) {
 
-                                        if (task.isSuccessful()) {
-                                            for (DocumentSnapshot snapshot : task.getResult().getDocuments()) {
-                                                helpers.print(snapshot.getData() + "");
-                                                modelArrayList.add(snapshot.toObject(ProductItemModel.class));
-                                            }
-                                            userCartAdapter.notifyDataSetChanged();
-                                            if (modelArrayList.isEmpty()) {
-                                                helpers.print("No Product found");
-                                            }
-                                            calculateTotalPrice();
-                                        } else {
-                                            helpers.hideLoader();
-                                            helpers.showSnackBar(activity, "Error getting data");
-                                        }
-                                    }
-                                });
+                            List<DocumentSnapshot> myListOfDocuments = task2.getResult().getDocuments();
+                                for (DocumentSnapshot snapshot : myListOfDocuments) {
+                                    modelArrayList.add(snapshot.toObject(ProductItemModel.class));
+                                }
+                                userCartAdapter.notifyDataSetChanged();
+                                if (modelArrayList.isEmpty()) {
+                                    helpers.print("No Product found");
+                                }
+                                calculateTotalPrice();
                             }
-                        } else {
+                        else {
                             helpers.hideLoader();
                             helpers.showSnackBar(activity, "Error getting data");
 
@@ -143,43 +135,65 @@ public class UserDashboardActivity extends AppCompatActivity {
                         userCartAdapter.notifyDataSetChanged();
                     }
                 });
-        /*db.collection("Dishes").get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                helpers.print(task.getResult().getDocuments().toString());
-                if (task.isSuccessful()) {
-
-                    for (QueryDocumentSnapshot document : task.getResult()) {
-                        helpers.print(document.getData().toString());
-                    }
-
-                } else {
-                    helpers.print("Error getting doc "+task.getException().getLocalizedMessage());
-
-                }
-            }
-        });*/
 
     }
 
     public void placeOrder(View view) {
         if (totalPrice > 0.0) {
-            Intent intent = new Intent(UserDashboardActivity.this, OrderPlacedWaitActivity.class);
-            startActivity(intent);
-            getAllProducts();
+
+            helpers.showLoader(UserDashboardActivity.this);
+            List<Task> tasks = new ArrayList<>();
+            for (ProductItemModel product : modelArrayList) {
+                if (product.getCount() > 0) {
+                    ModelOrder modelOrder = new ModelOrder();
+                    String orderId = db.collection(AppConstant.Orders).document().getId();
+                    modelOrder.setId(orderId);
+                    modelOrder.setDateTime("");
+                    modelOrder.setDishItem(product);
+                    modelOrder.setScheduled(false);
+                    modelOrder.setOrderPlacer(user);
+                    tasks.add(db.collection(AppConstant.Orders)
+                            .document(orderId)
+                            .set(modelOrder));
+                }
+            }
+
+            Tasks.whenAllSuccess(tasks).addOnCompleteListener(new OnCompleteListener<List<Object>>() {
+                @Override
+                public void onComplete(@NonNull Task<List<Object>> task) {
+
+                    if (task.isSuccessful()) {
+                        helpers.hideLoader();
+                        getAllProducts();
+                        Intent intent = new Intent(UserDashboardActivity.this, OrderPlacedWaitActivity.class);
+                        startActivity(intent);
+                    } else {
+                        helpers.showDialog(activity.getContext(), "Error while placing order "+task.getException().toString() );
+                    }
+
+
+                }
+            });
+
         } else {
-       helpers.showSnackBar(activity,"Please select any dish to order");
+            helpers.showSnackBar(activity, "Please select any dish to order");
         }
     }
 
     public void scheduleLater(View view) {
         if (totalPrice > 0.0) {
-//            Intent intent = new Intent(UserDashboardActivity.this, OrderPlacedWaitActivity.class);
-//            startActivity(intent);
-//            getAllProducts();
+            Intent intent = new Intent(UserDashboardActivity.this, ScheduleOrderUserActivity.class);
+            ArrayList<ProductItemModel> itemModelArrayList = new ArrayList<>();
+            for (ProductItemModel item : modelArrayList) {
+                if (item.getCount() > 0) {
+                    itemModelArrayList.add(item);
+                }
+            }
+            intent.putExtra("list", itemModelArrayList);
+            startActivity(intent);
+            getAllProducts();
         } else {
-            helpers.showSnackBar(activity,"Please select any dish to order");
+            helpers.showSnackBar(activity, "Please select any dish to order");
         }
 
     }

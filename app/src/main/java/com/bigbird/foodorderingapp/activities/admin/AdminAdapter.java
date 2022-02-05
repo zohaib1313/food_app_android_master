@@ -21,7 +21,6 @@ public class AdminAdapter extends RecyclerView.Adapter<AdminAdapter.MyViewHolder
     Context myContext;
 
 
-
     public AdminAdapter(ArrayList<AdminViewsModel> adminViewsModels, Context myContext) {
         this.adminViewsModels = adminViewsModels;
         this.myContext = myContext;
@@ -30,7 +29,7 @@ public class AdminAdapter extends RecyclerView.Adapter<AdminAdapter.MyViewHolder
     @NonNull
     @Override
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_dish, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.row_admin_views, parent, false);
         return new MyViewHolder(view);
     }
 
@@ -38,9 +37,11 @@ public class AdminAdapter extends RecyclerView.Adapter<AdminAdapter.MyViewHolder
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
 
         AdminViewsModel itemModel = adminViewsModels.get(position);
-        holder.tvName.setText(itemModel.getTitle());
-        holder.tvPrice.setText(itemModel.getValue());
-
+        holder.tvTitle.setText(itemModel.getTitle());
+        holder.tvValue.setText(itemModel.getValue());
+        holder.tvTitle.setTextColor(myContext.getResources().getColor(itemModel.getTextColor()));
+        holder.tvValue.setTextColor(myContext.getResources().getColor(itemModel.getTextColor()));
+        holder.itemView.setBackgroundColor(myContext.getResources().getColor(itemModel.getBoxColor()));
 
 
     }
@@ -51,12 +52,14 @@ public class AdminAdapter extends RecyclerView.Adapter<AdminAdapter.MyViewHolder
     }
 
     static class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView tvName, tvPrice;
+        TextView tvTitle;
+        TextView tvValue;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvName = itemView.findViewById(R.id.tvName);
-            tvPrice = itemView.findViewById(R.id.tvPrice);
+            tvTitle = itemView.findViewById(R.id.tvTitle);
+            tvValue = itemView.findViewById(R.id.tvValue);
+//            tvPrice = itemView.findViewById(R.id.tvPrice);
 
 
         }

@@ -2,78 +2,104 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/add_new_dish_dialog"
     android:layout_width="match_parent"
+
     android:layout_height="match_parent"
     android:layout_gravity="center"
-    android:id="@+id/add_new_dish_dialog"
-    android:background="@android:color/transparent"
+    android:background="@color/card_shadow_2"
     android:gravity="center"
+
     android:orientation="vertical"
     android:padding="@dimen/_18sdp">
 
-    <LinearLayout
-
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
 
-        android:orientation="vertical">
-
-
-        <TextView
-            android:id="@+id/textView10"
-            style="@style/AppTextViewBold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Add new dish"
-
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-
-        <EditText
-            android:id="@+id/etDishName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            android:hint="Name"
-            android:maxLines="1" />
-
-        <EditText
-            android:id="@+id/etDishPrice"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Price"
-            android:inputType="number"
-            android:maxLines="1" />
+        app:cardElevation="@dimen/_10sdp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="@dimen/_10sdp">
 
-            <soup.neumorphism.NeumorphButton
-                android:id="@+id/btnAdd"
-                style="@style/ButtonShape"
+
+            <TextView
+                android:id="@+id/textView10"
+                style="@style/AppTextViewBold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:text="Add New Dish"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/dishImage"
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_100sdp"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginBottom="@dimen/_10sdp"
+
+                android:src="@drawable/food_logo"
+                app:civ_border_color="#FF000000"
+                app:civ_border_width="2dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/guideline9"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/etDishName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:onClick="addDish"
-                android:text="Add" />
 
-            <soup.neumorphism.NeumorphButton
-                android:id="@+id/btnCancel"
-                style="@style/ButtonShape"
+                android:hint="Name"
+                android:maxLines="1" />
+
+            <EditText
+                android:id="@+id/etDishPrice"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:onClick="cancel"
-                android:text="Cancel"
+                android:hint="Price"
+                android:inputType="number"
+                android:maxLines="1" />
 
-                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <soup.neumorphism.NeumorphButton
+                    android:id="@+id/btnAdd"
+                    style="@style/ButtonShape"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="addDish"
+                    android:text="Add" />
+
+                <soup.neumorphism.NeumorphButton
+                    android:id="@+id/btnCancel"
+                    style="@style/ButtonShape"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="cancel"
+                    android:text="Cancel"
+
+                    />
+            </LinearLayout>
+
+
         </LinearLayout>
+    </androidx.cardview.widget.CardView>
 
-
-    </LinearLayout>
 </RelativeLayout>

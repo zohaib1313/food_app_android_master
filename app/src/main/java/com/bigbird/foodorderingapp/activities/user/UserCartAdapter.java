@@ -13,8 +13,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bigbird.foodorderingapp.R;
 import com.bigbird.foodorderingapp.models.ProductItemModel;
 import com.bigbird.foodorderingapp.utils.IOnItemClickListener;
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class UserCartAdapter extends RecyclerView.Adapter<UserCartAdapter.MyViewHolder> {
 
@@ -49,6 +52,7 @@ public class UserCartAdapter extends RecyclerView.Adapter<UserCartAdapter.MyView
         ProductItemModel itemModel = productItemModelArrayList.get(position);
         holder.tvName.setText(itemModel.getName());
         holder.tvPrice.setText("Price: " + itemModel.getPrice().toString());
+        Glide.with(myContext).load(itemModel.getImage()).into(holder.imageView);
         holder.tvCounts.setText(itemModel.getCount() + "");
         holder.tvIncrease.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,7 +76,7 @@ public class UserCartAdapter extends RecyclerView.Adapter<UserCartAdapter.MyView
 
     static class MyViewHolder extends RecyclerView.ViewHolder {
         TextView tvName, tvPrice, tvIncrease, tvDecrease, tvCounts;
-
+        CircleImageView imageView;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             tvName = itemView.findViewById(R.id.nameTextView);
@@ -80,7 +84,7 @@ public class UserCartAdapter extends RecyclerView.Adapter<UserCartAdapter.MyView
             tvIncrease = itemView.findViewById(R.id.increaseTv);
             tvDecrease = itemView.findViewById(R.id.decreaseTv);
             tvCounts = itemView.findViewById(R.id.counterTv);
-
+            imageView=itemView.findViewById(R.id.profile_image);
         }
     }
 }
