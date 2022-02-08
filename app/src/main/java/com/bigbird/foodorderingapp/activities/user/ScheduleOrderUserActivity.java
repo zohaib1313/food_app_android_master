@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.bigbird.foodorderingapp.R;
@@ -38,6 +39,7 @@ public class ScheduleOrderUserActivity extends AppCompatActivity implements Time
     String pickedTime = "";
     String pickedDate = "";
     private ArrayList<ProductItemModel> productsToSchedule = new ArrayList<>();
+    private EditText addressEt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +52,7 @@ public class ScheduleOrderUserActivity extends AppCompatActivity implements Time
         dishCountSchedule = findViewById(R.id.dishCountSchedule);
         pickDateSchedule = findViewById(R.id.pickDateSchedule);
         pickTimeSchedule = findViewById(R.id.pickTimeSchedule);
-
+        addressEt = findViewById(R.id.addressEt);
         productsToSchedule = (ArrayList<ProductItemModel>) getIntent().getSerializableExtra("list");
         helpers.print(productsToSchedule.size() + " is size");
         dishCountSchedule.setText(productsToSchedule.size() + "");
@@ -70,6 +72,7 @@ public class ScheduleOrderUserActivity extends AppCompatActivity implements Time
 
 
         });
+        addressEt.setText(currentUser.getLocation().toString());
     }
 
     private void pickDate() {
@@ -100,6 +103,7 @@ public class ScheduleOrderUserActivity extends AppCompatActivity implements Time
                 ModelOrder modelOrder = new ModelOrder();
                 String orderId = db.collection(AppConstant.Orders).document().getId();
                 modelOrder.setId(orderId);
+                modelOrder.setAddress(addressEt.getText().toString());
                 modelOrder.setDateTime(pickedDate.toString() + "|" + pickedTime.toString());
                 modelOrder.setDishItem(product);
                 modelOrder.setScheduled(true);

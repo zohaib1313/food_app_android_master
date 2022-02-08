@@ -1,18 +1,22 @@
 package com.bigbird.foodorderingapp.models;
 
 public class ModelUserTypeUser {
-    String  name,contact, email,location, password, type;
+    String name, contact, email, location, password, type;
+    String img;
+    boolean isApproved;
 
-    public ModelUserTypeUser() {
-    }
-
-    public ModelUserTypeUser(String name, String contact, String email, String location, String password, String type) {
+    public ModelUserTypeUser(String name, String contact, String email, String location, String password, String type, String img, boolean isApproved) {
         this.name = name;
         this.contact = contact;
         this.email = email;
         this.location = location;
         this.password = password;
         this.type = type;
+        this.img = img;
+        this.isApproved = isApproved;
+    }
+
+    public ModelUserTypeUser() {
     }
 
     public String getName() {
@@ -63,15 +67,19 @@ public class ModelUserTypeUser {
         this.type = type;
     }
 
-    @Override
-    public String toString() {
-        return "ModelUserTypeUser{" +
-                "name='" + name + '\'' +
-                ", contact='" + contact + '\'' +
-                ", email='" + email + '\'' +
-                ", location='" + location + '\'' +
-                ", password='" + password + '\'' +
-                ", type='" + type + '\'' +
-                '}';
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+
+    public boolean isApproved() {
+        return isApproved;
+    }
+
+    public void setApproved(boolean approved) {
+        isApproved = approved;
     }
 }

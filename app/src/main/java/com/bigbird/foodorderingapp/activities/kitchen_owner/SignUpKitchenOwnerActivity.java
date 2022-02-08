@@ -84,14 +84,14 @@ public class SignUpKitchenOwnerActivity extends AppCompatActivity {
         if (validate()) {
 
             ModelKitchenUser modelKitchenUser = new ModelKitchenUser();
-            modelKitchenUser.setName(etName.getText().toString());
+            modelKitchenUser.setName(etName.getText().toString().trim());
             modelKitchenUser.setType("UserTypeKitchen");
             modelKitchenUser.setApproved(false);
-            modelKitchenUser.setContact(etContact.getText().toString());
-            modelKitchenUser.setRestaurantName(etRestaurantName.getText().toString());
-            modelKitchenUser.setRestaurantLocation(getEtRestaurantLocation.getText().toString());
-            modelKitchenUser.setPassword(etPasswordKitchen.getText().toString());
-            modelKitchenUser.setEmail(etMail.getText().toString());
+            modelKitchenUser.setContact(etContact.getText().toString().trim());
+            modelKitchenUser.setRestaurantName(etRestaurantName.getText().toString().trim());
+            modelKitchenUser.setRestaurantLocation(getEtRestaurantLocation.getText().toString().trim());
+            modelKitchenUser.setPassword(etPasswordKitchen.getText().toString().trim());
+            modelKitchenUser.setEmail(etMail.getText().toString().trim());
 
 
             DocumentReference docRef = db.collection("UserTypeKitchen").document(modelKitchenUser.getEmail().toString());
@@ -123,22 +123,22 @@ public class SignUpKitchenOwnerActivity extends AppCompatActivity {
     private boolean validate() {
 
         boolean result = true;
-        if (etName.getText().toString().isEmpty()) {
+        if (etName.getText().toString().trim().isEmpty()) {
             Snackbar.make(activity, "Enter name", Snackbar.LENGTH_LONG).show();
             result = false;
-        } else if (etContact.getText().toString().isEmpty()) {
+        } else if (etContact.getText().toString().trim().isEmpty()) {
             Snackbar.make(activity, "Enter contact", Snackbar.LENGTH_LONG).show();
             result = false;
-        } else if (etRestaurantName.getText().toString().isEmpty()) {
+        } else if (etRestaurantName.getText().toString().trim().isEmpty()) {
             Snackbar.make(activity, "Enter restaurant name", Snackbar.LENGTH_LONG).show();
             result = false;
-        } else if (etMail.getText().toString().isEmpty()) {
+        } else if (etMail.getText().toString().trim().isEmpty()) {
             Snackbar.make(activity, "Enter mail", Snackbar.LENGTH_LONG).show();
             result = false;
-        } else if (getEtRestaurantLocation.getText().toString().isEmpty()) {
+        } else if (getEtRestaurantLocation.getText().toString().trim().isEmpty()) {
             Snackbar.make(activity, "Enter restaurant location", Snackbar.LENGTH_LONG).show();
             result = false;
-        } else if (etPasswordKitchen.getText().toString().isEmpty()) {
+        } else if (etPasswordKitchen.getText().toString().trim().isEmpty()) {
             Snackbar.make(activity, "Enter password", Snackbar.LENGTH_LONG).show();
             result = false;
         } else if (frontImage == null) {

@@ -147,6 +147,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:hint=""
+                    android:inputType="textPassword"
                     android:id="@+id/etPassword"
 
                     android:maxLines="1" />

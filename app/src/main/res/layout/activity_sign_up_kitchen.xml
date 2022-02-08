@@ -61,7 +61,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:hint=""
-                    android:maxLines="1" />
+                   />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -82,7 +82,7 @@
                     android:id="@+id/etContactKitchen"
 
                     android:hint=""
-                    android:maxLines="1" />
+                  />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -103,7 +103,7 @@
                     android:id="@+id/etMail"
 
                     android:hint=""
-                    android:maxLines="1" />
+/>
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -124,7 +124,7 @@
                     android:hint=""
                     android:id="@+id/etRestaurantNameKitchen"
 
-                    android:maxLines="1" />
+               />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -145,7 +145,7 @@
                     android:hint=""
                     android:id="@+id/etRestaurantLocationKitchen"
 
-                    android:maxLines="1" />
+                   />
             </LinearLayout>
 
             <LinearLayout
@@ -165,9 +165,11 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:hint=""
+                    android:inputType="textPassword"
+
                     android:id="@+id/etPasswordKitchen"
 
-                    android:maxLines="1" />
+                   />
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
@@ -194,7 +196,7 @@
                         android:layout_width="@dimen/_50sdp"
                         android:layout_height="@dimen/_50sdp"
                         android:hint="Enter name"
-                        android:maxLines="1"
+
                         android:src="@color/app_color_blue" />
                 </LinearLayout>
 
@@ -225,7 +227,7 @@
                         android:layout_width="@dimen/_50sdp"
                         android:layout_height="@dimen/_50sdp"
                         android:hint="Enter name"
-                        android:maxLines="1"
+
                         android:src="@color/app_color_blue" />
                 </LinearLayout>
 

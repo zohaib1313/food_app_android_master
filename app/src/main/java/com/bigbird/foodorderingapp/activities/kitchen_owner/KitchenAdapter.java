@@ -66,8 +66,8 @@ public class KitchenAdapter extends RecyclerView.Adapter<KitchenAdapter.MyViewHo
        CircleImageView imageView;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
-            tvName = itemView.findViewById(R.id.tvName);
-            tvPrice = itemView.findViewById(R.id.tvPrice);
+            tvName = itemView.findViewById(R.id.nameTextView);
+            tvPrice = itemView.findViewById(R.id.priceTextView);
             imageView=itemView.findViewById(R.id.profile_image);
 
         }

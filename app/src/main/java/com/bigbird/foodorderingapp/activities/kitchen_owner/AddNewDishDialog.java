@@ -25,6 +25,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -32,7 +33,6 @@ import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.util.HashMap;
 
 public class AddNewDishDialog extends AppCompatActivity {
     EditText etDishName, etDishPrice;
@@ -99,25 +99,27 @@ public class AddNewDishDialog extends AppCompatActivity {
                                 itemModel.setName(etDishName.getText().toString());
                                 itemModel.setPrice(Double.parseDouble(etDishPrice.getText().toString()));
                                 itemModel.setCount(0);
+                                itemModel.setKitchenName(kitchenUser.getRestaurantName());
                                 itemModel.setImage(uri.toString());
                                 itemModel.setId(id);
                                 itemModel.setOwnerId(kitchenUser.getEmail());
                                 helpers.print(id);
                                 db.collection(AppConstant.Dishes)
-                                        .document(kitchenUser.getEmail())
-                                        .set(itemModel)
-                                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                                            @Override
-                                            public void onComplete(@NonNull Task<Void> task) {
-                                                helpers.hideLoader();
-                                                if (task.isSuccessful()) {
-                                                    helpers.waitAndFinish(AddNewDishDialog.this);
-                                                } else {
-                                                    helpers.print(itemModel.getName() + " Dish Add Failed");
-                                                    helpers.showSnackBar(activity, "Dish add failed " + task.getException().toString());
-                                                }
-                                            }
-                                        });
+
+                                        .add(itemModel).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<DocumentReference> task) {
+
+                                        helpers.hideLoader();
+                                        if (task.isSuccessful()) {
+                                            helpers.waitAndFinish(AddNewDishDialog.this);
+                                        } else {
+                                            helpers.print(itemModel.getName() + " Dish Add Failed");
+                                            helpers.showSnackBar(activity, "Dish add failed " + task.getException().toString());
+                                        }
+
+                                    }
+                                });
                             }
                         });
                     }

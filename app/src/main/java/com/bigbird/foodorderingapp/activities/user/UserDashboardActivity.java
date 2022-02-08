@@ -3,12 +3,15 @@ package com.bigbird.foodorderingapp.activities.user;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -28,7 +31,9 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.firestore.Source;
+import com.google.type.DateTime;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,6 +47,7 @@ public class UserDashboardActivity extends AppCompatActivity {
     private ModelUserTypeUser user;
     private TextView etTotalPrice;
     private double totalPrice = 0.0;
+    String address;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +56,7 @@ public class UserDashboardActivity extends AppCompatActivity {
         getSupportActionBar().setTitle(user.getName() + "'s Dashboard");
         setContentView(R.layout.activity_user_dashboard);
         rvCartItem = findViewById(R.id.rvCartUser);
-        rvCartItem.setLayoutManager(new LinearLayoutManager(this));
+        rvCartItem.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
         userCartAdapter = new UserCartAdapter(modelArrayList, this);
         rvCartItem.setAdapter(userCartAdapter);
         userCartAdapter.notifyDataSetChanged();
@@ -59,7 +65,7 @@ public class UserDashboardActivity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         getAllProducts();
 
-
+        address = user.getLocation();
         userCartAdapter.setAddClickListener(new IOnItemClickListener() {
             @Override
             public void onItemClick(int position) {
@@ -117,16 +123,15 @@ public class UserDashboardActivity extends AppCompatActivity {
                         if (task2.isSuccessful()) {
 
                             List<DocumentSnapshot> myListOfDocuments = task2.getResult().getDocuments();
-                                for (DocumentSnapshot snapshot : myListOfDocuments) {
-                                    modelArrayList.add(snapshot.toObject(ProductItemModel.class));
-                                }
-                                userCartAdapter.notifyDataSetChanged();
-                                if (modelArrayList.isEmpty()) {
-                                    helpers.print("No Product found");
-                                }
-                                calculateTotalPrice();
+                            for (DocumentSnapshot snapshot : myListOfDocuments) {
+                                modelArrayList.add(snapshot.toObject(ProductItemModel.class));
                             }
-                        else {
+                            userCartAdapter.notifyDataSetChanged();
+                            if (modelArrayList.isEmpty()) {
+                                helpers.print("No Product found");
+                            }
+                            calculateTotalPrice();
+                        } else {
                             helpers.hideLoader();
                             helpers.showSnackBar(activity, "Error getting data");
 
@@ -140,44 +145,68 @@ public class UserDashboardActivity extends AppCompatActivity {
 
     public void placeOrder(View view) {
         if (totalPrice > 0.0) {
-
-            helpers.showLoader(UserDashboardActivity.this);
-            List<Task> tasks = new ArrayList<>();
-            for (ProductItemModel product : modelArrayList) {
-                if (product.getCount() > 0) {
-                    ModelOrder modelOrder = new ModelOrder();
-                    String orderId = db.collection(AppConstant.Orders).document().getId();
-                    modelOrder.setId(orderId);
-                    modelOrder.setDateTime("");
-                    modelOrder.setDishItem(product);
-                    modelOrder.setScheduled(false);
-                    modelOrder.setOrderPlacer(user);
-                    tasks.add(db.collection(AppConstant.Orders)
-                            .document(orderId)
-                            .set(modelOrder));
-                }
-            }
-
-            Tasks.whenAllSuccess(tasks).addOnCompleteListener(new OnCompleteListener<List<Object>>() {
-                @Override
-                public void onComplete(@NonNull Task<List<Object>> task) {
-
-                    if (task.isSuccessful()) {
-                        helpers.hideLoader();
-                        getAllProducts();
-                        Intent intent = new Intent(UserDashboardActivity.this, OrderPlacedWaitActivity.class);
-                        startActivity(intent);
-                    } else {
-                        helpers.showDialog(activity.getContext(), "Error while placing order "+task.getException().toString() );
-                    }
-
-
-                }
-            });
-
+            showAddressPickDialog();
         } else {
             helpers.showSnackBar(activity, "Please select any dish to order");
         }
+    }
+
+    private void uploadOrderData() {
+
+        helpers.showLoader(UserDashboardActivity.this);
+        List<Task> tasks = new ArrayList<>();
+        for (ProductItemModel product : modelArrayList) {
+            if (product.getCount() > 0) {
+                ModelOrder modelOrder = new ModelOrder();
+                String orderId = db.collection(AppConstant.Orders).document().getId();
+                modelOrder.setId(orderId);
+                modelOrder.setDateTime("");
+                modelOrder.setDishItem(product);
+                modelOrder.setScheduled(false);
+                modelOrder.setOrderPlacer(user);
+                modelOrder.setAddress(address);
+                tasks.add(db.collection(AppConstant.Orders)
+                        .document(orderId)
+                        .set(modelOrder));
+            }
+        }
+
+        Tasks.whenAllSuccess(tasks).addOnCompleteListener(new OnCompleteListener<List<Object>>() {
+            @Override
+            public void onComplete(@NonNull Task<List<Object>> task) {
+
+                if (task.isSuccessful()) {
+                    helpers.hideLoader();
+                    getAllProducts();
+                    Intent intent = new Intent(UserDashboardActivity.this, OrderPlacedWaitActivity.class);
+                    startActivity(intent);
+                } else {
+                    helpers.showDialog(activity.getContext(), "Error while placing order " + task.getException().toString());
+                }
+
+
+            }
+        });
+    }
+
+    private void showAddressPickDialog() {
+         EditText taskEditText = new EditText(activity.getContext());
+        taskEditText.setText(address);
+        AlertDialog dialog = new AlertDialog.Builder(activity.getContext())
+                .setTitle("Change Address")
+                .setMessage("Chane Address or use default")
+                .setView(taskEditText)
+                .setPositiveButton("Proceed", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        address = String.valueOf(taskEditText.getText());
+                        uploadOrderData();
+                        dialog.dismiss();
+                    }
+                })
+                .create();
+        dialog.show();
+
     }
 
     public void scheduleLater(View view) {

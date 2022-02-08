@@ -14,7 +14,7 @@
         android:id="@+id/imageView2"
         android:layout_width="@dimen/_30sdp"
         android:layout_height="@dimen/_30sdp"
-        app:layout_constraintBottom_toTopOf="@+id/rvAdmin"
+        app:layout_constraintBottom_toTopOf="@+id/rvCartUser"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textView7"
         app:srcCompat="@drawable/ic_baseline_exit_to_app_24" />
@@ -56,7 +56,7 @@
                 android:layout_marginStart="@dimen/_50sdp"
                 android:layout_marginTop="@dimen/_20sdp"
                 android:gravity="start"
-                android:textColor="@color/white"
+
 
                 android:padding="@dimen/_12sdp"
                 android:text="Total Price:"
@@ -70,9 +70,9 @@
                 android:layout_marginTop="@dimen/_20sdp"
                 android:layout_marginEnd="@dimen/_50sdp"
                 android:maxLines="1"
-android:textColor="@color/white"
+
                 android:padding="@dimen/_12sdp"
-                android:text=""
+                android:text="0.0"
                 android:textSize="@dimen/_12sdp" />
         </LinearLayout>
 

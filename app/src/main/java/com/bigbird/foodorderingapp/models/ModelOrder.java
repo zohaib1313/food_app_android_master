@@ -5,20 +5,30 @@ public class ModelOrder {
     String dateTime;
     boolean isScheduled;
     boolean isCompleted;
+    String address;
     ModelUserTypeUser orderPlacer;
     ProductItemModel dishItem;
 
     public ModelOrder() {
     }
 
-    public ModelOrder(boolean isScheduled, boolean isCompleted, String id, String dateTime, ModelUserTypeUser orderPlacer, ModelKitchenUser orderReceiver, ProductItemModel dishItem) {
-        this.id = id;
-        this.isCompleted = isCompleted;
-        this.isScheduled = isScheduled;
-        this.dateTime = dateTime;
-        this.orderPlacer = orderPlacer;
 
+    public ModelOrder(String id, String dateTime, boolean isScheduled, boolean isCompleted, String address, ModelUserTypeUser orderPlacer, ProductItemModel dishItem) {
+        this.id = id;
+        this.dateTime = dateTime;
+        this.isScheduled = isScheduled;
+        this.isCompleted = isCompleted;
+        this.address = address;
+        this.orderPlacer = orderPlacer;
         this.dishItem = dishItem;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public boolean isCompleted() {

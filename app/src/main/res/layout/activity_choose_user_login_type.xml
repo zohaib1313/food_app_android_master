@@ -20,24 +20,25 @@
 
         <soup.neumorphism.NeumorphButton
             style="@style/ButtonShape"
-            android:onClick="orderFoodLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onClick="orderFoodLogin"
             android:text="I want to order food" />
 
         <soup.neumorphism.NeumorphButton
             style="@style/ButtonShape"
-            android:onClick="kitchenLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:onClick="kitchenLogin"
             android:text="I am kitchen owner" />
 
         <soup.neumorphism.NeumorphButton
-            android:onClick="adminLogin"
             style="@style/ButtonShape"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Admin" />
+            android:onClick="adminLogin"
+            android:text="Admin"
+            android:visibility="gone" />
     </LinearLayout>
 
     <LinearLayout
@@ -45,17 +46,27 @@
         android:layout_height="match_parent"
         android:layout_gravity="bottom"
         android:layout_weight="2"
-        android:gravity="bottom">
+        android:gravity="bottom"
+        android:orientation="vertical">
 
         <TextView
-            android:onClick="gotoTermsAndConditions"
-         style="@style/AppTextViewBold"
+            style="@style/AppTextViewBold"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/_8sdp"
             android:gravity="center"
+            android:onClick="gotoTermsAndConditions"
             android:text="Terms of use"
             android:textSize="@dimen/_12sdp" />
+
+        <soup.neumorphism.NeumorphButton
+            style="@style/ButtonShape"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="@dimen/_45sdp"
+            android:layout_gravity="center"
+            android:onClick="adminLogin"
+            android:text="Admin"
+            app:neumorph_backgroundColor="@color/app_color_gray" />
     </LinearLayout>
 
 

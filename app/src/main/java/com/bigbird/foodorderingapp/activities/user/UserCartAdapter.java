@@ -54,6 +54,7 @@ public class UserCartAdapter extends RecyclerView.Adapter<UserCartAdapter.MyView
         holder.tvPrice.setText("Price: " + itemModel.getPrice().toString());
         Glide.with(myContext).load(itemModel.getImage()).into(holder.imageView);
         holder.tvCounts.setText(itemModel.getCount() + "");
+        holder.kitchenName.setText(itemModel.getKitchenName() + "");
         holder.tvIncrease.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -75,8 +76,9 @@ public class UserCartAdapter extends RecyclerView.Adapter<UserCartAdapter.MyView
     }
 
     static class MyViewHolder extends RecyclerView.ViewHolder {
-        TextView tvName, tvPrice, tvIncrease, tvDecrease, tvCounts;
+        TextView tvName, tvPrice, tvIncrease, tvDecrease, tvCounts, kitchenName;
         CircleImageView imageView;
+
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             tvName = itemView.findViewById(R.id.nameTextView);
@@ -84,7 +86,8 @@ public class UserCartAdapter extends RecyclerView.Adapter<UserCartAdapter.MyView
             tvIncrease = itemView.findViewById(R.id.increaseTv);
             tvDecrease = itemView.findViewById(R.id.decreaseTv);
             tvCounts = itemView.findViewById(R.id.counterTv);
-            imageView=itemView.findViewById(R.id.profile_image);
+            kitchenName = itemView.findViewById(R.id.kitchenName);
+            imageView = itemView.findViewById(R.id.profile_image);
         }
     }
 }

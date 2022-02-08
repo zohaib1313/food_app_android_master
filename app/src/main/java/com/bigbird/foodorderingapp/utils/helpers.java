@@ -6,11 +6,15 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
+import com.airbnb.lottie.LottieDrawable;
+import com.amrdeveloper.lottiedialog.LottieDialog;
+import com.bigbird.foodorderingapp.R;
 import com.bigbird.foodorderingapp.activities.ChooseUserLoginTypeActivity;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -29,9 +33,11 @@ public class helpers {
     public static void showLoader(Context context) {
 
         pd = new ProgressDialog(context);
-        pd.setMessage("loading");
         pd.setCancelable(false);
+        pd.setMessage("Loading...");
+        pd.create();
         pd.show();
+
     }
 
     public static void hideLoader() {

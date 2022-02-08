@@ -2,7 +2,7 @@ package com.bigbird.foodorderingapp.models;
 
 import java.io.Serializable;
 
-public class ProductItemModel  implements Serializable {
+public class ProductItemModel implements Serializable {
 
     String id;
     String name;
@@ -10,14 +10,24 @@ public class ProductItemModel  implements Serializable {
     String image;
     int count;
     String ownerId;
+    String kitchenName;
 
-    public ProductItemModel(String image,String id, String name, Double price, int count,String ownerId) {
+    public ProductItemModel(String image, String kitchenName, String id, String name, Double price, int count, String ownerId) {
         this.id = id;
-        this.image=image;
-        this.ownerId=ownerId;
+        this.kitchenName = kitchenName;
+        this.image = image;
+        this.ownerId = ownerId;
         this.name = name;
         this.price = price;
         this.count = count;
+    }
+
+    public String getKitchenName() {
+        return kitchenName;
+    }
+
+    public void setKitchenName(String kitchenName) {
+        this.kitchenName = kitchenName;
     }
 
     public ProductItemModel() {
@@ -80,7 +90,7 @@ public class ProductItemModel  implements Serializable {
                 ", count=" + count +
                 ", ownerId=" + ownerId +
                 ", image=" + image +
-
+                ", kitchen Owner Name=" + kitchenName +
                 '}';
     }
 }

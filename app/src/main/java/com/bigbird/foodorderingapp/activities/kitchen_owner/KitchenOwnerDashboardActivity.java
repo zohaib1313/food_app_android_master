@@ -6,9 +6,11 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -62,9 +64,8 @@ public class KitchenOwnerDashboardActivity extends AppCompatActivity {
                 + "'s " + "Kitchen");
         setContentView(R.layout.activity_kitchen_owner_dashboard);
         db = FirebaseFirestore.getInstance();
-
         rvKitchen = findViewById(R.id.rvKitchen);
-        rvKitchen.setLayoutManager(new LinearLayoutManager(this));
+        rvKitchen.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
         kitchenAdapter = new KitchenAdapter(modelArrayList, this);
         rvKitchen.setAdapter(kitchenAdapter);
         kitchenAdapter.notifyDataSetChanged();
@@ -76,11 +77,11 @@ public class KitchenOwnerDashboardActivity extends AppCompatActivity {
                 showMyDialog(position);
             }
         });
+       // helpers.showLoader(activity.getContext());
         loadData();
     }
 
     public void addNewDish(View view) {
-
         Intent intent = new Intent(KitchenOwnerDashboardActivity.this, AddNewDishDialog.class);
         startActivity(intent);
     }
