@@ -119,7 +119,7 @@ public class AdminDashboardActivity extends AppCompatActivity {
                     }
 
                 }
-                value = value + " Completed:" + completed + " Scheduled:" + scheduled;
+                value = value + " Completed:" + completed + " Scheduled:" + scheduled + "\nIn Process:"+(queryDocumentSnapshots.size()-scheduled) +"";
                 viewsModel.setValue(value);
                 modelArrayList.add(viewsModel);
             }

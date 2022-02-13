@@ -105,11 +105,9 @@ public class AddNewDishDialog extends AppCompatActivity {
                                 itemModel.setOwnerId(kitchenUser.getEmail());
                                 helpers.print(id);
                                 db.collection(AppConstant.Dishes)
-
-                                        .add(itemModel).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                                        .document(id).set(itemModel).addOnCompleteListener(new OnCompleteListener<Void>() {
                                     @Override
-                                    public void onComplete(@NonNull Task<DocumentReference> task) {
-
+                                    public void onComplete(@NonNull Task<Void> task) {
                                         helpers.hideLoader();
                                         if (task.isSuccessful()) {
                                             helpers.waitAndFinish(AddNewDishDialog.this);
@@ -117,7 +115,6 @@ public class AddNewDishDialog extends AppCompatActivity {
                                             helpers.print(itemModel.getName() + " Dish Add Failed");
                                             helpers.showSnackBar(activity, "Dish add failed " + task.getException().toString());
                                         }
-
                                     }
                                 });
                             }

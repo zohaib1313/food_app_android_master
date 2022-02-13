@@ -5,6 +5,7 @@
     android:id="@+id/signInActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg_img"
     android:padding="@dimen/_12sdp"
     tools:context=".activities.SignInActivity">
 
@@ -28,6 +29,7 @@
         tools:ignore="RtlCompat" />
 
     <TextView
+android:layout_marginTop="@dimen/_20sdp"
         android:id="@+id/textView2"
         style="@style/AppTextViewBold"
         android:layout_width="0dp"
@@ -36,7 +38,7 @@
         android:text="User Id:"
         app:layout_constraintEnd_toStartOf="@+id/etUserId"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline4" />
+        app:layout_constraintTop_toBottomOf="@+id/imageView4" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline3"
@@ -44,13 +46,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.3" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.21393035" />
 
     <TextView
         android:id="@+id/textView3"
@@ -84,47 +79,52 @@
         app:layout_constraintTop_toTopOf="@+id/textView3"
         tools:ignore="RtlCompat" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.65" />
 
     <ImageView
         android:id="@+id/neumorphButton"
         android:layout_width="match_parent"
-
         android:layout_height="@dimen/_40sdp"
         android:onClick="login"
-
+        android:layout_marginTop="@dimen/_10sdp"
+android:layout_marginBottom="@dimen/_10sdp"
         android:src="@drawable/login_btn"
+        app:layout_constraintBottom_toTopOf="@+id/textView4"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline5" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
+        android:layout_marginBottom="@dimen/_10sdp"
+
+        android:layout_marginTop="@dimen/_10sdp"
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_20sdp"
         android:text="Not Registered?"
+        app:layout_constraintBottom_toTopOf="@+id/textView5"
         app:layout_constraintEnd_toEndOf="@+id/neumorphButton"
-        app:layout_constraintStart_toStartOf="@+id/neumorphButton"
-        app:layout_constraintTop_toBottomOf="@+id/neumorphButton" />
+        app:layout_constraintStart_toStartOf="@+id/neumorphButton" />
 
     <TextView
         android:id="@+id/textView5"
         style="@style/AppTextViewNormal"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_40sdp"
         android:onClick="gotoSignUpScreen"
         android:text="@string/register"
+
         android:textColor="@color/app_color_blue"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/textView4"
-        app:layout_constraintStart_toStartOf="@+id/textView4"
-        app:layout_constraintTop_toTopOf="@+id/textView4" />
+        app:layout_constraintStart_toStartOf="@+id/textView4" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_180sdp"
+        android:layout_margin="@dimen/_8sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,12 +7,15 @@
     android:layout_height="match_parent"
     android:paddingStart="@dimen/_8sdp"
     android:paddingTop="@dimen/_8sdp"
+    android:background="@drawable/bg_img"
 
     android:paddingEnd="@dimen/_8sdp"
     tools:context=".activities.admin.AdminDashboardActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
+
+
         android:layout_height="match_parent"
         android:paddingStart="@dimen/_8sdp"
         android:paddingTop="@dimen/_8sdp"

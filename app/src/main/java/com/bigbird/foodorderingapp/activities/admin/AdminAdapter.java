@@ -49,13 +49,17 @@ public class AdminAdapter extends RecyclerView.Adapter<AdminAdapter.MyViewHolder
          holder.itemView.setOnClickListener(new View.OnClickListener() {
              @Override
              public void onClick(View view) {
-                 Intent intent =new Intent(myContext,ChangeUserStatusActivity.class);
-                 if(itemModel.getActions()== Actions.actionKitchen){
-                     intent.putExtra(AppConstant.UserType,AppConstant.UserTypeKitchen);
-                 }else  if(itemModel.getActions()== Actions.actionUsers){
-                     intent.putExtra(AppConstant.UserType,AppConstant.UserTypeUser);
+                 if(itemModel.getActions()!=Actions.actionTotalOrders){
+                     Intent intent =new Intent(myContext,ChangeUserStatusActivity.class);
+                     if(itemModel.getActions()== Actions.actionKitchen){
+                         intent.putExtra(AppConstant.UserType,AppConstant.UserTypeKitchen);
+                     }else  if(itemModel.getActions()== Actions.actionUsers){
+                         intent.putExtra(AppConstant.UserType,AppConstant.UserTypeUser);
+                     }
+                     myContext.startActivity(intent);
                  }
-                 myContext.startActivity(intent);
+
+
              }
          });
     }

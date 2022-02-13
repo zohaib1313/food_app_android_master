@@ -2,46 +2,53 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/signupKitchen"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/signupKitchen"
+    android:background="@drawable/bg_img"
     tools:context=".activities.kitchen_owner.SignUpKitchenOwnerActivity">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.12" />
-
-    <TextView
-        android:id="@+id/textView6"
-        style="@style/AppTextViewNormal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Sign up"
-        android:textSize="@dimen/_20sdp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline6"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:padding="@dimen/_20sdp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline8"
+        app:layout_constraintBottom_toTopOf="@+id/imageView6"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline6">
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
 
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/imageView3"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_180sdp"
+                    android:layout_margin="@dimen/_8sdp"
+                    android:scaleType="fitXY"
+                    app:srcCompat="@drawable/chef_title_img"
+                    tools:layout_editor_absoluteY="15dp" />
+
+                <TextView
+                    android:id="@+id/textView6"
+                    style="@style/AppTextViewNormal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Sign up"
+                    android:textSize="@dimen/_20sdp"
+                    tools:layout_editor_absoluteY="300dp" />
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -56,13 +63,13 @@
                     android:text="Name:" />
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
                     android:id="@+id/etNameKitchen"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:hint=""
-                   />
+                    android:hint="" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -76,14 +83,14 @@
                     android:text="Contact:" />
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etContactKitchen"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:id="@+id/etContactKitchen"
 
-                    android:hint=""
-                  />
+                    android:hint="" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -97,14 +104,14 @@
                     android:text="Email:" />
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etMail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:id="@+id/etMail"
 
-                    android:hint=""
-/>
+                    android:hint="" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -118,14 +125,15 @@
                     android:text="Restaurant Name:" />
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etRestaurantNameKitchen"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:hint=""
-                    android:id="@+id/etRestaurantNameKitchen"
 
-               />
+                    />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -139,13 +147,13 @@
                     android:text="Restaurant Location:" />
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etRestaurantLocationKitchen"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:hint=""
-                    android:id="@+id/etRestaurantLocationKitchen"
 
-                   />
+                    />
             </LinearLayout>
 
             <LinearLayout
@@ -161,16 +169,17 @@
                     android:text="Password:" />
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etPasswordKitchen"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:hint=""
+
                     android:inputType="textPassword"
 
-                    android:id="@+id/etPasswordKitchen"
-
-                   />
+                    />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -238,23 +247,17 @@
 
     </ScrollView>
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.84" />
 
-
-    <soup.neumorphism.NeumorphButton
-
-        android:onClick="signUpKitchen"
-        style="@style/ButtonShape"
+    <ImageView
+        android:id="@+id/imageView6"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="SIGN UP"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:onClick="signUpKitchen"
+        android:src="@drawable/signup_btn"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scrollView2" />
+        app:layout_constraintHorizontal_bias="0.384"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

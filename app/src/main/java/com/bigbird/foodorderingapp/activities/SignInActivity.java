@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bigbird.foodorderingapp.R;
@@ -37,6 +38,7 @@ public class SignInActivity extends AppCompatActivity {
     View activity;
     TextView tvRegister;
     TextView notReg;
+    ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,10 +51,17 @@ public class SignInActivity extends AppCompatActivity {
         activity = findViewById(R.id.signInActivity);
         tvRegister = findViewById(R.id.textView5);
         notReg = findViewById(R.id.textView4);
+        imageView = findViewById(R.id.imageView4);
         db = FirebaseFirestore.getInstance();
-        if (userType.equals("UserTypeAdmin")) {
+        if (userType.equals(AppConstant.UserTypeAdmin)) {
+            imageView.setImageResource(R.drawable.admin_title_img);
             notReg.setVisibility(View.GONE);
             tvRegister.setVisibility(View.GONE);
+        } else if (userType.equals(AppConstant.UserTypeKitchen)) {
+            imageView.setImageResource(R.drawable.chef_title_img);
+        } else if (userType.equals(AppConstant.UserTypeUser)) {
+            imageView.setImageResource(R.drawable.user_title_img);
+
         }
     }
 
@@ -91,14 +100,14 @@ public class SignInActivity extends AppCompatActivity {
             default:
                 throw new IllegalStateException("Unexpected value: " + userType);
         }
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
+        finishAffinity();
 
     }
 
 
     public void login(View view) {
-
-
         if (etUserId.getText().toString().trim().isEmpty()) {
             Snackbar.make(view, "Enter user id", Snackbar.LENGTH_LONG).show();
             return;
@@ -228,21 +237,19 @@ public class SignInActivity extends AppCompatActivity {
                     if (document.exists()) {
 
                         ModelUserTypeUser user = document.toObject(ModelUserTypeUser.class);
-                          if(user.isApproved()){
-                              if (user.getPassword().equals(etUserPassword.getText().toString().trim())) {
+                        if (user.isApproved()) {
+                            if (user.getPassword().equals(etUserPassword.getText().toString().trim())) {
 
-                                  helpers.print(user.toString());
-                                  SessionManager.getInstance(SignInActivity.this).createUserTypeUserLoginSession(user);
-                                  gotoDashBoard();
-                              } else {
-                                  Snackbar.make(activity, "Wrong user id or password", Snackbar.LENGTH_LONG).show();
-                              }
-                          }
-                          else {
-                              helpers.showDialog(activity.getContext(), "Your account is not approved yet");
+                                helpers.print(user.toString());
+                                SessionManager.getInstance(SignInActivity.this).createUserTypeUserLoginSession(user);
+                                gotoDashBoard();
+                            } else {
+                                Snackbar.make(activity, "Wrong user id or password", Snackbar.LENGTH_LONG).show();
+                            }
+                        } else {
+                            helpers.showDialog(activity.getContext(), "Your account is not approved yet");
 
-                          }
-
+                        }
 
 
                     } else {

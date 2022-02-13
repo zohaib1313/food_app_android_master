@@ -95,6 +95,7 @@ public class KitchenOwnerDashboardActivity extends AppCompatActivity {
 
 
     private void showMyDialog(int position) {
+        helpers.print((modelArrayList.get(position).getId().toString()));
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(KitchenOwnerDashboardActivity.this);
         alertDialog.setTitle("Alert");
         alertDialog.setMessage("Are you sure you want delete this?");
@@ -103,7 +104,7 @@ public class KitchenOwnerDashboardActivity extends AppCompatActivity {
         alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 helpers.showLoader(KitchenOwnerDashboardActivity.this);
-                db.collection(AppConstant.Dishes).document(modelKitchenUser.getEmail()).collection(modelKitchenUser.getEmail())
+                db.collection(AppConstant.Dishes)
                         .document(modelArrayList.get(position).getId())
                         .delete()
                         .addOnSuccessListener(new OnSuccessListener<Void>() {

@@ -7,6 +7,7 @@
     android:paddingTop="@dimen/_8sdp"
     android:id="@+id/activityUser"
     android:paddingStart="@dimen/_8sdp"
+    android:background="@drawable/bg_img"
     android:paddingEnd="@dimen/_8sdp"
     tools:context=".activities.user.UserDashboardActivity">
     <ImageView
@@ -81,7 +82,7 @@
             android:layout_height="@dimen/_40sdp"
             android:layout_marginTop="@dimen/_10sdp"
             android:onClick="placeOrder"
-            android:src="@drawable/place_oder_btn" />
+            android:src="@drawable/place_order_btn" />
 
         <ImageView
             android:src="@drawable/schedule_btn"
